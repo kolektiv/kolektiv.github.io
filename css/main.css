@@ -68,6 +68,7 @@ article {
 article header h1 {
 	float: left;
 	width: 300px;
+	font-weight: bold;
 }
 
 article h1.entry-title a:hover:after {
