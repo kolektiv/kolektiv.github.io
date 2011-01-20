@@ -106,6 +106,10 @@ nav ul {
 	list-style: none;	
 }
 
+nav ul li {
+        clear: both;
+}
+
 nav + nav ul {
 	margin: 0;
 }
@@ -115,11 +119,13 @@ nav abbr.published {
 	width: 120px;
 	text-align: right;
 	color: #ccc;
+	clear: left;
 }
 
 nav span.entry-title {
 	float: right;
 	width: 160px;
+	clear: left;
 }
 
 nav h1 {
@@ -151,7 +157,7 @@ nav h2 + h1 + ul {
 
 nav h2 {
 	display: block;
-	clear: left;
+	clear: both;
 	margin-left: 160px;
 	padding-top: 24px;
 }
@@ -208,4 +214,9 @@ a.email:hover:after {
 
 a.external:hover:after {
         content: " [External]";
+}
+
+code {
+	background-color: #f5f5f5;
+	font-size: 14px;
 }

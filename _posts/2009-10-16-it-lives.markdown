@@ -1,0 +1,6 @@
+---
+title: It Lives!
+tags:
+- testing
+---
+Consider this a Hello World, throwing down the big switch with lightning in the background. Boris Karloff, all that stuff. Except in this case it's a shell script (which belongs dead - cron is not the best way to do what I'm doing).

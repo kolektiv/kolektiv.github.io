@@ -1,0 +1,15 @@
+---
+title: Lately...
+layout: post
+tags:
+- projects
+---
+It's been a while, so a quick update on current projects will fill some dead air time...
+
+I've got a couple of projects on the go, the most useful one of which is MidiCore. It's a .NET library for working with MIDI in realtime, and it turns old style MIDI code (open a stream, blah blah blah) in to nice .NET 4 stuff. MIDI data as RX.net queryable event streams? Totally! Everything as nice managed types so you can plug all kinds of filters and modifications in to real time MIDI data? Absolutely! It's on Github currently, but not yet opened up. I'll be open sourcing it soon once I'm happy with the basic design. 
+
+Other projects at the moment - managed HTTP server which supports web sockets and other new (kinda) features of the web. Also some extensions which may or may not work out to Nick Blumhardt's Stateless project - time will tell if those end up making any sense.
+
+So, that's all for now, a series on the MidiCore design will be starting some time soon - it's kind of fun, and maybe a bit interesting, so I'll be showing some of the thinking behind that once the code goes open source.
+
+Cheers! Andy.
