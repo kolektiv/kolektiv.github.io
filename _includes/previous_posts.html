@@ -1,0 +1,21 @@
+<h1>Previous</h1>
+<ul class="hfeed">
+  {% for post in site.posts offset:1 %}
+  <li class="hentry">
+    <span class="entry-title">
+      <a href="{{ post.url }}" rel="bookmark" title="Read {{ post.title }}">
+	{{ post.title }}
+      </a>
+    </span>
+    <span class="byline">
+      Posted by: 
+      <address class="vcard author"> 
+        <a class="url fn nickname" href="http://www.xyncro.com" rel="me" title="Link to the author">Andrew</a> 
+      </address> 
+    </span>
+    <abbr class="published updated" title="{{ post.date }}">
+      {{ post.date | date: "%d/%m/%Y" }}
+    </abbr>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,139 @@
+body {
+	margin: 60px 0 60px 80px;
+	font-size: 12px;
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	line-height: 24px;
+}
+
+.byline, body > header h2 {
+	display: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover {
+	background-color: #5ec5ff;
+	color: #fff;
+	margin: -3px;
+	padding: 3px;
+}
+
+h1, h2, h3 {
+	margin: 0 0 24px 0;
+	padding: 0;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+body > header h1 {
+	font-weight: bold;
+}
+
+body > header h1 a:hover:after {
+	content: "[Home]";
+}
+
+p {
+	margin: 0 0 24px 0;
+	padding: 0;
+}
+
+/* @group Articles */
+
+article {
+	width: 440px;
+	float: left;
+}
+
+article header h1 {
+	float: left;
+	width: 300px;
+}
+
+article h1.entry-title a:hover:after {
+	content: "[Permalink]";
+}
+
+article header abbr.published {
+	float: right;
+	color: #ccc;
+}
+
+article section.entry-content {
+	clear: left;
+}
+
+/* @end */
+
+/* @group Navigation */
+
+nav {
+	float: left;
+	margin-left: 40px;
+	width: 320px;
+	color: #999;
+}
+
+nav + nav {
+	float: left;
+	width: 160px;
+	color: #ccc;
+}
+
+nav ul {
+	margin: 0 0 24px 0;
+	padding: 0;
+	list-style: none;	
+}
+
+nav + nav ul {
+	margin: 0;
+}
+
+nav abbr.published {
+	float: left;
+	width: 120px;
+	text-align: right;
+	color: #ccc;
+}
+
+nav span.entry-title {
+	float: right;
+	width: 160px;
+}
+
+nav h1 {
+	margin-left: 160px;
+	color: #666;
+}
+
+nav + nav h1 {
+	margin-left: 0;
+	color: #999;
+}
+
+nav ul + h1 + ul a:hover:after {
+	content: "[Github]";
+}
+
+nav + nav ul + h1 + ul a:hover:after {
+	content: "[External]";
+}
+
+nav ul + h1 {
+	padding-top: 24px;
+	clear: both;
+}
+
+nav#primary ul + h1 + ul {
+	margin-left: 160px;
+}
+
+/* @end */
+
+footer {
+	clear: left;
+}
