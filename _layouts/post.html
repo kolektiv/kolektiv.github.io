@@ -1,6 +1,35 @@
 ---
 layout: default
 ---
-<div id="post">
-  {{ content }}
-</div>
+<article class="hentry" id="{{ post.url }}">
+  <header>
+    <hgroup>
+      <h1 class="entry-title">
+	<a href="{{ page.url }}" rel="bookmark" title="Permalink for {{ page.title }}">
+	  {{ page.title }}
+	</a>
+      </h1>
+      {% if subtitle %}
+      <h2 class="entry-summary">{{ page.subtitle }}</h2>
+      {% endif %}
+    </hgroup>
+    <span class="byline">
+      Posted by: 
+      <address class="vcard author"> 
+        <a class="url fn nickname" href="http://www.xyncro.com" rel="me" title="Link to the author">Andrew</a> 
+      </address> 
+    </span>
+    <abbr class="published updated" title="{{ page.date }}">
+      {{ page.date | date: "%d/%m/%Y" }}
+    </abbr>
+  </header>
+  <section class="entry-content">
+    {{ content }}
+  </section>
+</article>
+<nav id="primary">
+{% include latest_posts.html %}
+{% include archive.html %}
+{% include projects.html %}
+</nav>
+{% include secondary_nav.html %}

@@ -1,6 +1,6 @@
-<h1>Previous</h1>
+<h1>Latest</h1>
 <ul class="hfeed">
-  {% for post in site.posts limit:5 offset:1 %}
+  {% for post in site.posts limit:5 %}
   <li class="hentry">
     <span class="entry-title">
       <a href="{{ post.url }}" rel="bookmark" title="Read {{ post.title }}">

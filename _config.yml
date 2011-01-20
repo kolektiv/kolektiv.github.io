@@ -3,4 +3,3 @@ server: false
 server_port: 8080
 pygments: true
 lsi: false
-permalink: date

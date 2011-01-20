@@ -5,6 +5,10 @@ body {
 	line-height: 24px;
 }
 
+header, footer, article, section, nav {
+        display: block;
+}
+
 .byline, body > header h2 {
 	display: none;
 }
@@ -128,7 +132,7 @@ nav + nav h1 {
 	color: #999;
 }
 
-nav ul + h1 + ul a:hover:after {
+nav h2 + h1 + ul a:hover:after {
 	content: "[Github]";
 }
 
@@ -141,12 +145,67 @@ nav ul + h1 {
 	clear: both;
 }
 
-nav#primary ul + h1 + ul {
+nav h2 + h1 + ul {
 	margin-left: 160px;
+}
+
+nav h2 {
+	display: block;
+	clear: left;
+	margin-left: 160px;
+	padding-top: 24px;
 }
 
 /* @end */
 
 footer {
 	clear: left;
+}
+
+dl {
+        margin: 0;
+	padding: 0;
+}
+
+dd, dt {
+        margin: 0;
+	padding: 0;
+	display: block;
+}
+
+dt {
+	width: 120px;
+	float: left;
+	color: #999;
+}
+
+dd {
+	width: 320px;
+	float: right;
+}
+
+dd a:before, p a:before {
+        content: "";
+	margin-left: 0;
+}
+
+
+dd a:hover:before, p a:hover:before {
+        content: "";
+}
+
+dd a, p a {
+        border-bottom: 1px solid #ccc;
+}
+
+dd a:hover, p a:hover {
+        border-bottom: none;
+}
+
+a.email:hover:after {
+        content: " [Email]";
+}
+
+a.external:hover:after {
+        content: " [External]";
 }
