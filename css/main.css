@@ -65,9 +65,13 @@ article {
 	float: left;
 }
 
+article section {
+        clear: both;
+}
+
 article header h1 {
 	float: left;
-	width: 300px;
+	width: 360px;
 	font-weight: bold;
 }
 
