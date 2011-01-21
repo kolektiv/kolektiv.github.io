@@ -225,3 +225,28 @@ code {
 	background-color: #f5f5f5;
 	font-size: 14px;
 }
+
+section ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+section ul li {
+        margin: 0;
+	padding: 0;
+	clear: both;
+}
+
+section ul span.entry-title {
+	margin-right: 14px;
+	color: #666;
+	width: 320px;
+	display: block;
+	float: left;
+}
+
+section ul abbr.published {
+        color: #999;
+	float: right;
+}
