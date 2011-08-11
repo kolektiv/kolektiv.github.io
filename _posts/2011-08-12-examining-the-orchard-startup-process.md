@@ -53,6 +53,13 @@ Discussing [Autofac][] is outside the scope of these posts, but there's a good w
 
 Let's move away from our `MvcApplication` class now and see what the host is and how it's created. The host is created by the `OrchardStarter` class, which can be found in the Orchard.Framework project in the Environment folder (namespaces don't always match folder structure in Orchard, as a side note!).
 
+{% highlight csharp %}
+public static void Method(int arg1)
+{
+    Console.WriteLine(arg1);
+}
+{% endhighlight %}
+
 When `CreateHost(...)` is called on OrchardStarter (which is a static class), it creates a new Autofac container. `OrchardStarter` is primarily about registering all of the Orchard core dependencies with the IoC container.
 
 [How Orchard Works]: http://www.orchardproject.net/docs/How-Orchard-works.ashx
