@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>{{ page.title }}</title>
-    	<meta name="author" content="Andrew Cherry" />
-    	<link rel="stylesheet" href="/css/main.css" type="text/css" />
-		<link rel="stylesheet" href="/css/syntax.csharp.css" type="text/css" />
-		<link rel="profile" href="http://microformats.org/profile/hcard">
-		<link rel="profile" href="http://microformats.org/profile/hatom">
-		<link href="http://xyncro.com/atom.xml" rel="alternate" title="Andrew Cherry on Software and Technology" type="application/atom+xml" /> 
-	</head>
-	<body>
-		{% include header.html %}
-		<section>
-    		{{ content }}
-		</section>
-		{% include secondary_nav.html %}
-    	{% include footer.html %}
-	</body>
+  <head>
+    <title>{{ page.title }}</title>
+    <meta name="author" content="Andrew Cherry" />
+    <link rel="stylesheet" href="/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="/css/syntax.csharp.css" type="text/css" />
+    <link rel="profile" href="http://microformats.org/profile/hcard">
+    <link rel="profile" href="http://microformats.org/profile/hatom">
+    <link href="http://xyncro.com/atom.xml" rel="alternate" title="Andrew Cherry on Software and Technology" type="application/atom+xml" /> 
+  </head>
+  <body>
+    {% include header.html %}
+    {{ content }}
+    {% include secondary_nav.html %}
+    {% include footer.html %}
+  </body>
 </html>
