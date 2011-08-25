@@ -2,7 +2,7 @@
 layout: post
 title: Examining the Orchard start up process
 categories:
-- Orchard Internals
+- orchard
 ---
 
 ## Introduction
