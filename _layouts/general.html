@@ -1,23 +1,18 @@
 ---
 layout: default
 ---
+
 <article id="{{ post.url }}">
-  <header>
-    <hgroup>
-      <h1>
-	<a href="{{ page.url }}" rel="bookmark" title="Permalink for {{ page.title }}">
-	  {{ page.title }}
-	</a>
-      </h1>
-    </hgroup>
-  </header>
-  <section>
-    {{ content }}
-  </section>
+	<header>
+		<hgroup>
+			<h1>
+				<a href="{{ page.url }}" rel="bookmark" title="Permalink for {{ page.title }}">{{ page.title }}</a>
+			</h1>
+		</hgroup>
+	</header>
+	<section>
+		{{ content }}
+	</section>
 </article>
-<nav id="primary">
-{% include latest_posts.html %}
-{% include archive.html %}
-{% include projects.html %}
-</nav>
-{% include secondary_nav.html %}
+
+{% include primary_nav_latest.html %}

@@ -2,37 +2,32 @@
 layout: default
 title: Andrew Cherry on Software and Technology
 ---
+
 {% for post in site.posts limit:1 %}
+
 <article class="hentry" id="{{ post.url }}">
-  <header>
-    <hgroup>
-      <h1 class="entry-title">
-	<a href="{{ post.url }}" rel="bookmark" title="Permalink for {{ post.title }}">
-	  {{ post.title }}
-	</a>
-      </h1>
-      {% if post.subtitle %}
-      <h2 class="entry-summary">{{ post.subtitle }}</h2>
-      {% endif %}
-    </hgroup>
-    <span class="byline">
-      Posted by: 
-      <address class="vcard author"> 
-        <a class="url fn nickname" href="http://www.xyncro.com" rel="me" title="Link to the author">Andrew</a> 
-      </address> 
-    </span>
-    <abbr class="published updated" title="{{ post.date }}">
-      {{ post.date | date: "%d/%m/%Y" }}
-    </abbr>
-  </header>
-  <section class="entry-content">
-    {{ post.content }}
-  </section>
+	<header>
+		<hgroup>
+			<h1 class="entry-title">
+				<a href="{{ post.url }}" rel="bookmark" title="Permalink for {{ post.title }}">{{ post.title }}</a>
+			</h1>
+      		{% if post.subtitle %}
+      		<h2 class="entry-summary">{{ post.subtitle }}</h2>
+      		{% endif %}
+		</hgroup>
+		<span class="byline">
+			Posted by: 
+			<address class="vcard author"> 
+				<a class="url fn nickname" href="http://www.xyncro.com" rel="me" title="Link to the author">Andrew</a> 
+			</address> 
+		</span>
+		<abbr class="published updated" title="{{ post.date }}">{{ post.date | date: "%d/%m/%Y" }}</abbr>
+	</header>
+	<section class="entry-content">
+		{{ post.content }}
+	</section>
 </article>
+
 {% endfor %}
-<nav id="primary">
-{% include previous_posts.html %}
-{% include archive.html %}
-{% include projects.html %}
-</nav>
-{% include secondary_nav.html %}
+
+{% include primary_nav_previous.html %}
