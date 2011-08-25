@@ -3,18 +3,18 @@ layout: default
 ---
 
 <section>
-  <article id="{{ post.url }}">
-    <header>
-      <hgroup>
-	<h1>
-	  <a href="{{ page.url }}" rel="bookmark" title="Permalink for {{ page.title }}">{{ page.title }}</a>
-	</h1>
-      </hgroup>
-    </header>
-    <section>
-      {{ content }}
-    </section>
-  </article>
+    <article id="{{ post.url }}">
+	<header>
+	    <hgroup>
+		<h1>
+		    <a href="{{ page.url }}" rel="bookmark" title="Permalink for {{ page.title }}">{{ page.title }}</a>
+		</h1>
+	    </hgroup>
+	</header>
+	<section>
+	    {{ content }}
+	</section>
+    </article>
 </section>
 
 {% include primary_nav_latest.html %}
