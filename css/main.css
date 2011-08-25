@@ -9,42 +9,42 @@ header, nav, section, footer, article {
 /* @group Positioning */
 
 body {
-	margin: 10px 0 10px 50px;
-	padding: 0;
-	background-color: #fff;
+    margin: 10px 0 10px 50px;
+    padding: 0;
+    background-color: #fff;
 }
 
 header, nav, section, footer {
-	margin-bottom: 10px;
-	padding: 10px 20px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
 }
 
 body > section {
-	background-color: #eee;
-	width: 440px;
-	float: left;
-	border-bottom: 10px solid #ddd;
+    background-color: #eee;
+    width: 440px;
+    float: left;
+    border-bottom: 10px solid #ddd;
 }
 
 header + nav {
-	display: none;
+    display: none;
 }
 
 section + nav {
-	width: 260px;
-	left: 570px;
-	position: absolute;
+    width: 260px;
+    left: 570px;
+    position: absolute;
 }
 
 nav + nav {
-	left: 880px;
-	position: absolute;
-	width: 100px;
+    left: 880px;
+    position: absolute;
+    width: 150px;
 }
 
 footer {
-	clear: left;
-	width: 440px;
+    clear: left;
+    width: 440px;
 }
 
 /* @end */
@@ -52,27 +52,27 @@ footer {
 /* @group Global Styling */
 
 body {
-	font-family: "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
-	font-size: 13px;
-	line-height: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
+    font-size: 13px;
+    line-height: 20px;
 }
 
 h1, h2, h3, h4 {
-	font-size: 13px;
-	margin: 0;
-	padding: 0;
+    font-size: 13px;
+    margin: 0;
+    padding: 0;
 }
 
 a {
-	text-decoration: none;
-	color: #000;
+    text-decoration: none;
+    color: #000;
 }
 
 a:hover {
-	background-color: #666;
-	color: #fff;
-	margin: -3px;
-	padding: 3px;
+    background-color: #666;
+    color: #fff;
+    margin: -3px;
+    padding: 3px;
 }
 
 /* @end */
@@ -80,11 +80,11 @@ a:hover {
 /* @group Header */
 
 body > header a:hover:after {
-	content: " [Home]";
+    content: " [Home]";
 }
 
 header h2 {
-	display: none;
+    display: none;
 }
 
 /* @end */
@@ -92,55 +92,55 @@ header h2 {
 /* @group Article */
 
 article header {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 article .entry-title {
-	float: left;
-	margin-bottom: 20px;
+    float: left;
+    margin-bottom: 20px;
 }
 
 article .entry-title a:hover:after {
-	content: " [Permalink]";
+    content: " [Permalink]";
 }
 
 article .updated, article .published {
-	float: right;
-	color: #999;
+    float: right;
+    color: #999;
 }
 
 article .byline {
-	display: none;
+    display: none;
 }
 
 article section {
-	clear: left;
-	margin: 0;
-	padding: 0;
+    clear: left;
+    margin: 0;
+    padding: 0;
 }
 
 article p {
-	padding: 0;
-	margin: 0 0 20px 0;
+    padding: 0;
+    margin: 0 0 20px 0;
 }
 
 article p:last-child {
-	margin: 0;
+    margin: 0;
 }
 
 article p a {
-	color: #333;
-	border-bottom: 1px dashed #ccc;
-	margin: 0 2px;
+    color: #333;
+    border-bottom: 1px dashed #ccc;
+    margin: 0 2px;
 }
 
 article p a:hover {
-	background-color: transparent;
-	padding: 0;
-	margin: 0 2px;
-	color: #333;
-	border-bottom: 1px solid #333;
+    background-color: transparent;
+    padding: 0;
+    margin: 0 2px;
+    color: #333;
+    border-bottom: 1px solid #333;
 }
 
 /* @end */
@@ -148,23 +148,23 @@ article p a:hover {
 /* @group Code */
 
 .highlight pre {
-	background-color: #fff;
-	margin: 0 -10px 20px -10px;
-	padding: 10px;
-	border: 1px solid #ddd;
-	line-height: 16px;
+    background-color: #fff;
+    margin: 0 -10px 20px -10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    line-height: 16px;
 }
 
 code {
-	font-size: 12px;
-	font-family: "Consolas", Courier, mono;
-	color: #333;
+    font-size: 12px;
+    font-family: "Consolas", Courier, mono;
+    color: #333;
 }
 
 .highlight .lineno {
-	color: #ccc;
-	padding-right: 20px;
-	font-family: "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
+    color: #ccc;
+    padding-right: 20px;
+    font-family: "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 }
 
 /* @end */
@@ -172,15 +172,15 @@ code {
 /* @group General Content */
 
 body > section p {
-	margin: 0 0 20px 0;
+    margin: 0 0 20px 0;
 }
 
 body > section p:last-child {
-	margin: 0;
+    margin: 0;
 }
 
 body > section > h1 {
-	margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 /* @end */
@@ -188,26 +188,26 @@ body > section > h1 {
 /* @group Skip Navigation */
 
 header + nav {
-	margin-top: -10px;
+    margin-top: -10px;
 }
 
 header + nav a {
-	display: block;
-	background-color: #ccc;
-	margin: 0 -20px 0 -20px;
-	padding: 5px 20px;
-	color: #fff;
+    display: block;
+    background-color: #ccc;
+    margin: 0 -20px 0 -20px;
+    padding: 5px 20px;
+    color: #fff;
 }
 
 header + nav a:hover {
-	display: block;
-	margin: 0 -20px 0 -20px;
-	padding: 5px 20px;
-	color: #fff;
+    display: block;
+    margin: 0 -20px 0 -20px;
+    padding: 5px 20px;
+    color: #fff;
 }
 
 header + nav a:hover:after {
-	content: " [Skip Content]";
+    content: " [Skip Content]";
 }
 
 /* @end */
@@ -215,57 +215,57 @@ header + nav a:hover:after {
 /* @group Primary Navigation */
 
 nav h1 {
-	margin: 0 0 20px 100px;
+    margin: 0 0 20px 100px;
 }
 
 nav h1 {
-	color: #999;
+    color: #999;
 }
 
 nav a {
-	color: #666;
+    color: #666;
 }
 
 nav ul {
-	list-style: none;
-	padding: 0;
-	margin-bottom: 20px;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
 }
 
 nav ul:last-child {
-	margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 nav li {
-	clear: both;
+    clear: both;
 }
 
 nav .entry-title {
-	width: 160px;
-	float: right;
+    width: 160px;
+    float: right;
 }
 
 nav .published, nav .updated {
-	float: left;
-	color: #ccc;
+    float: left;
+    color: #ccc;
 }
 
 nav .byline {
-	display: none;
+    display: none;
 }
 
 nav p {
-	clear: left;
-	padding-top: 20px;
-	margin: 20px 0 20px 100px;
+    clear: left;
+    padding-top: 20px;
+    margin: 20px 0 20px 100px;
 }
 
 nav p + h1 + ul {
-	margin-left: 100px;
+    margin-left: 100px;
 }
 
 section + nav ul:last-child a:hover:after {
-	content: " [Github]";
+    content: " [Github]";
 }
 
 /* @end */
@@ -273,20 +273,20 @@ section + nav ul:last-child a:hover:after {
 /* @group Secondary Navigation */
 
 nav + nav h1 {
-	margin-left: 0;
-	color: #ccc;
+    margin-left: 0;
+    color: #ccc;
 }
 
 nav + nav a {
-	color: #999;
+    color: #999;
 }
 
 nav + nav ul a:hover:after {
-	content: " [External]";
+    content: " [External]";
 }
 
 nav + nav ul:last-child a:hover:after {
-	content: "";
+    content: "";
 }
 
 /* @end */
@@ -294,125 +294,125 @@ nav + nav ul:last-child a:hover:after {
 /* @group Footer */
 
 footer {
-	color: #666;
+    color: #666;
 }
 
 footer p {
-	margin: 0 0 20px 0;
+    margin: 0 0 20px 0;
 }
 
 footer p:last-child {
-	margin: 0;
+    margin: 0;
 }
 
 footer h1 {
-	margin-bottom: 20px;
-	color: ;
+    margin-bottom: 20px;
+    color: ;
 }
 
 footer p a {
-	color: #333;
-	border-bottom: 1px dashed #ccc;
-	margin: 0;
-	padding: 0;
+    color: #333;
+    border-bottom: 1px dashed #ccc;
+    margin: 0;
+    padding: 0;
 }
 
 footer p a:hover {
-	background-color: transparent;
-	padding: 0;
-	margin: 0;
-	color: #333;
-	border-bottom: 1px solid #333;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    color: #333;
+    border-bottom: 1px solid #333;
 }
 
 /* @end */
 
 @media all and (max-width: 650px) {	
-	
-/* @group Positioning */
+    
+    /* @group Positioning */
 
-	body {
-		margin: 10px 20px;
-	}
+    body {
+	margin: 10px 20px;
+    }
 
-	body > section {
-		float: none;
-		width: inherit;
-	}
+    body > section {
+	float: none;
+	width: inherit;
+    }
 
-	section + nav, nav + nav, footer {
-		width: inherit;
-		position: inherit;
-	}
-	
-	header + nav {
-		display: block;
-	}
+    section + nav, nav + nav, footer {
+	width: inherit;
+	position: inherit;
+    }
+    
+    header + nav {
+	display: block;
+    }
 
-/* @end */
+    /* @end */
 
-body > header a {
+    body > header a {
 	display: block;
 	margin: -5px -20px;
 	padding: 5px 20px;
-}
+    }
 
-body > header a:hover {
+    body > header a:hover {
 	display: block;
 	margin: -5px -20px;
 	padding: 5px 20px;
-}
+    }
 
-/* @group Primary Navigation */
+    /* @group Primary Navigation */
 
-	nav h1 {
-		margin-left: 0;
-		color: #666;
-	}
-	
-	nav .entry-title {
-		width: 75%;
-	}
-	
-	nav p {
-		margin-left: 0;
-	}
-	
-	nav p + h1 + ul {
-		margin-left: 0;
-	}
-	
-	nav a {
-		color: #666;
-	}
-	
-	nav + nav a {
-		color: #666;
-	}
-	
-	nav p a, nav + nav a, nav p + h1 + ul a {
-		width: 100%;
-		display: block;
-		padding: 5px 20px;
-		margin: 0 -20px 1px -20px;
-		background-color: #eee;
-	}
-	
-	nav p a:hover, nav + nav a:hover, nav p + h1 + ul a:hover {
-		display: block;
-		padding: 5px 20px;
-		margin: 0 -20px 1px -20px;
-		background-color: #666;
-	}
+    nav h1 {
+	margin-left: 0;
+	color: #666;
+    }
+    
+    nav .entry-title {
+	width: 75%;
+    }
+    
+    nav p {
+	margin-left: 0;
+    }
+    
+    nav p + h1 + ul {
+	margin-left: 0;
+    }
+    
+    nav a {
+	color: #666;
+    }
+    
+    nav + nav a {
+	color: #666;
+    }
+    
+    nav p a, nav + nav a, nav p + h1 + ul a {
+	width: 100%;
+	display: block;
+	padding: 5px 20px;
+	margin: 0 -20px 1px -20px;
+	background-color: #eee;
+    }
+    
+    nav p a:hover, nav + nav a:hover, nav p + h1 + ul a:hover {
+	display: block;
+	padding: 5px 20px;
+	margin: 0 -20px 1px -20px;
+	background-color: #666;
+    }
 
-/* @end */
+    /* @end */
 
-/* @group Secondary Navigation */
+    /* @group Secondary Navigation */
 
-	nav + nav h1 {
-		color: #666;
-	}
+    nav + nav h1 {
+	color: #666;
+    }
 
 /* @end */	
-		
+    
 }
