@@ -53,7 +53,7 @@ Discussing [Autofac][] is outside the scope of these posts, but there's a good w
 
 Let's move away from our `MvcApplication` class now and see what the host is and how it's created. The host is created by the `OrchardStarter` class, which can be found in the Orchard.Framework project in the Environment folder (namespaces don't always match folder structure in Orchard, as a side note!).
 
-{% highlight csharp %}
+{% highlight csharp linenos %}
 // Comment here
 public static void Method(int arg1)
 {
