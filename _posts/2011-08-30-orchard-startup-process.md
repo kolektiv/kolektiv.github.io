@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Orchard Startup Process
+title: Orchard Startup
 categories:
 - orchard
 ---
