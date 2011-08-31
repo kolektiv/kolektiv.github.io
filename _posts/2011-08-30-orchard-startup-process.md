@@ -19,7 +19,15 @@ If we look in the global.asax.cs file in the root of the Orchard.Web project, th
 
 The first place to look is in the application start method, which looks like this...
 
-<script src="https://gist.github.com/1183465.js?file=orchardstart1"></script>
+{% highlight csharp %}
+
+protected void Application_Start() {
+    RegisterRoutes(RouteTable.Routes);
+    _starter = new Starter<IOrchardHost>(HostInitialization, HostBeginRequest, HostEndRequest);
+    _starter.OnApplicationStart(this);
+}
+
+{% endhighlight %}
 
 The call to `RegisterRoutes` is normal, but then we're straight in to Orchard code. We create a new `Starter<IOrchardHost>` which is a static member of the application, so it's always around.
 
