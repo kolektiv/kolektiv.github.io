@@ -35,7 +35,7 @@ This gets passed a few arguments on construction, each of which is a method to c
 
 ## Orchard.WarmupStarter
 
-We've seen that we're creating a new `Starter<IOrchardHost>` here, so let's have a look at that. This class can be found in the **Orchard.WarmupStarter** project, which is the only Orchard project which is explicitly referenced in the web application - it's referenced in the **web.config** file. This is because **Orchard.WarmupStarter** also provides an HttpModule (which is a bit out of scope in this article, but will likely be mentioned elsewhere at soime point).
+We've seen that we're creating a new `Starter<IOrchardHost>` here, so let's have a look at that. This class can be found in the **Orchard.WarmupStarter** project, which is the only Orchard project which is explicitly referenced in the web application - it's referenced in the **web.config** file. This is because **Orchard.WarmupStarter** also provides an HttpModule (which is a bit out of scope in this article, but will likely be mentioned elsewhere at some point).
 
 `Starter<T>` (**Starter.cs**) is where we want to look. We've seen that we're passing it three methods which it can call (with suitable signatures) and when we construct it it simply stores those as member variables. When we then call `OnApplicationStart` it calls `LaunchStartupThread`, passing the HttpApplication instance that we've just given it. `LaunchStartupThread` looks like this:
 
