@@ -127,8 +127,8 @@ article p {
 
 article aside {
     background-color: rgb(255, 255, 210);
-    margin: 0 -10px;
-    padding: 9px;
+    margin: 0 -11px;
+    padding: 10px;
     border: 1px dashed #ddd;
 }
 
@@ -157,8 +157,8 @@ article p a:hover {
 
 .highlight pre {
     background-color: #fff;
-    margin: 0 -10px 20px -10px;
-    padding: 9px;
+    margin: 0 -11px 20px -11px;
+    padding: 10px;
     border: 1px solid #ddd;
     line-height: 16px;
     overflow: scroll;
