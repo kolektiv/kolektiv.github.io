@@ -153,6 +153,9 @@ article p a:hover {
     padding: 10px;
     border: 1px solid #ddd;
     line-height: 16px;
+    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: visible;
 }
 
 code {

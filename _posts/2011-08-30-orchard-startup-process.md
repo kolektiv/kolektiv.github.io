@@ -19,7 +19,7 @@ If we look in the global.asax.cs file in the root of the Orchard.Web project, th
 
 The first place to look is in the application start method, which looks like this...
 
-{% highlight csharp %}
+{% highlight csharp linenos %}
 
 protected void Application_Start() {
     RegisterRoutes(RouteTable.Routes);
