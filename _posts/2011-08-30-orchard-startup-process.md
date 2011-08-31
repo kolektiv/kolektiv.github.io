@@ -96,7 +96,11 @@ We're getting our `IOrchardHost` instance by calling `OrchardStarter.CreateHost`
 
 <aside>
 
+<p>
+
 If you're not familiar with IoC that's a pretty big topic in its own right, and I'm not about to go in to a lengthy discussion of that &mdash; these articles are plenty long enough on their own. Martin Fowler has written a solid and detailed explanation of the principles of [Dependency Injection][] which covers IoC, and the [Autofac Wiki][] has plenty of information about IoC and Autofac (the IoC container which Orchard uses under the hood). It'll probably help to understand IoC when working with Orchard.
+
+</p>
 
 </aside>
 
