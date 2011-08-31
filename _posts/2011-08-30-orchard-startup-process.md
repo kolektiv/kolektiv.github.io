@@ -15,7 +15,7 @@ Orchard does a lot when it starts up. Although it's an ASP.NET MVC 3 web applica
 
 Everything starts off in the web application itself. If you've got the source code handy, this is the **Orchard.Web** project. Looking in here we see... not a lot. This is because Orchard only really uses this as a boot up point for the application proper. There's no content in here or traditional models, controllers and views &mdash; only the code needed to call out to Orchard and get things running.
 
-If we look in the **global.asax.cs** file in the root of the Orchard.Web project, this is where we'll find our Orchard code. We don't even have some of the code which would normally be present in a default ASP.NET MVC 3 web app &mdash; there's no registration of Areas or Filters in here as Orchard deals with these itself. It doesn't map any Routes either, only ignoring the Route for resource.axd, as Orchard deals with Routes too.
+If we look in the **global.asax.cs** file of the Orchard.Web project, this is where we'll find our Orchard code. We don't even have some of the code which would normally be present in a default ASP.NET MVC 3 web app &mdash; there's no registration of Areas or Filters in here as Orchard deals with these itself. It doesn't map any Routes either, only ignoring the Route for resource.axd, as Orchard deals with Routes too.
 
 The first place to look is in the application start method, which looks like this:
 
@@ -95,7 +95,24 @@ private static IOrchardHost HostInitialization(HttpApplication application) {
 We're getting our `IOrchardHost` instance by calling `OrchardStarter.CreateHost`. This is where the meat of our object instantiation is going to happen. It's also the first place that we see another key element of Orchard, the use of *IoC*.
 
 <aside><p>
-If you're not familiar with IoC that's a pretty big topic in its own right, and I'm not about to go in to a lengthy discussion of that &mdash; these articles are plenty long enough on their own. Martin Fowler has written a solid and detailed explanation of the principles of <a href="http://martinfowler.com/articles/injection.html">Dependency Injection</a> which covers IoC, and the <a href="http://code.google.com/p/autofac/wiki/GettingStarted">Autofac Wiki</a> has plenty of information about IoC and Autofac (the IoC container which Orchard uses under the hood). It'll probably help to understand IoC when working with Orchard.
+<strong>Note</strng>: If you're not familiar with IoC that's a pretty big topic in its own right, and I'm not about to go in to a lengthy discussion of that &mdash; these articles are plenty long enough on their own. Martin Fowler has written a solid and detailed explanation of the principles of <a href="http://martinfowler.com/articles/injection.html">Dependency Injection</a> which covers IoC, and the <a href="http://code.google.com/p/autofac/wiki/GettingStarted">Autofac Wiki</a> has plenty of information about IoC and Autofac (the IoC container which Orchard uses under the hood). It'll probably help to understand IoC when working with Orchard.
 </p></aside>
+
+Let's look at `OrchardStarter` and see what it's doing. It's in the **Orchard.Framework** project in **Environment/OrchardStarter.cs**. We start off by calling `CreateHost`, passing in an Action which takes a `ContainerBuilder`. This is an Autofac concept, but essentially it's the class used to register dependencies when we build an IoC container. At the moment it's being passed a method `MvcSingletons` in our **global.asax.cs** which registers the Routes, Binders and View Engines as they are currently set up for the application, making them available to the IoC container.
+
+`CreateHost` looks like this:
+
+{% highlight csharp %}
+
+public static IOrchardHost CreateHost(Action<ContainerBuilder> registrations) {
+    var container = CreateHostContainer(registrations);
+    return container.Resolve<IOrchardHost>();
+}
+
+{% endhighlight %}
+
+It gets an IoC container by calling `CreateHostContainer` and then asks that container for an instance of `IOrchardHost`. `CreateHostContainer` (which I won't give source for here, but it's a very useful place to look if you're wondering what implentation of an interface is used by default) registers all of the default dependencies that Orchard needs to run &mdash; all of the dependencies needed to create an `IOrchardHost`. So we can see that IoC is key to Orchard &mdash; there's no manual creation of object graphs here, just IoC being used satisfy all of the dependencies at runtime.
+
+This is also a really useful place to look if you're wondering about the lifecycle of any of the components of Orchard. It's likely that they're registered here, with the lifecycle being managed by the IoC container (Autofac is very good in this regard). 
 
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
