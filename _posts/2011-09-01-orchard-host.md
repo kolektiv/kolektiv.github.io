@@ -5,7 +5,7 @@ categories:
 - orchard
 ---
 
-This is part 2 of a series on [Orchard Internals][]. See [Orchard Internals][] for previous posts (and a full post listing).
+This is part 2 of a series on [Orchard Internals][]. See [the introductory post][Orchard Internals] for previous posts (and a full post listing).
 
 ## Overview
 
