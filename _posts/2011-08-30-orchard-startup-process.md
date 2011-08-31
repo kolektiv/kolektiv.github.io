@@ -94,16 +94,8 @@ private static IOrchardHost HostInitialization(HttpApplication application) {
 
 We're getting our `IOrchardHost` instance by calling `OrchardStarter.CreateHost`. This is where the meat of our object instantiation is going to happen. It's also the first place that we see another key element of Orchard, the use of *IoC*.
 
-<aside>
-
-<p>
-
-If you're not familiar with IoC that's a pretty big topic in its own right, and I'm not about to go in to a lengthy discussion of that &mdash; these articles are plenty long enough on their own. Martin Fowler has written a solid and detailed explanation of the principles of [Dependency Injection][] which covers IoC, and the [Autofac Wiki][] has plenty of information about IoC and Autofac (the IoC container which Orchard uses under the hood). It'll probably help to understand IoC when working with Orchard.
-
-</p>
-
-</aside>
+<aside><p>
+If you're not familiar with IoC that's a pretty big topic in its own right, and I'm not about to go in to a lengthy discussion of that &mdash; these articles are plenty long enough on their own. Martin Fowler has written a solid and detailed explanation of the principles of <a href="http://martinfowler.com/articles/injection.html">Dependency Injection</a> which covers IoC, and the <a href="http://code.google.com/p/autofac/wiki/GettingStarted">Autofac Wiki</a> has plenty of information about IoC and Autofac (the IoC container which Orchard uses under the hood). It'll probably help to understand IoC when working with Orchard.
+</p></aside>
 
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
-[Dependency Injection]: http://martinfowler.com/articles/injection.html
-[Autofac Wiki]: http://code.google.com/p/autofac/wiki/GettingStarted
