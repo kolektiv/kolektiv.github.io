@@ -66,7 +66,7 @@ public void LaunchStartupThread(HttpApplication application) {
 
 {% endhighlight %}
 
-Most of this is just concerned with making sure that this is run asynchronously (and working with the previously mentioned module) and that any errors as a result of that are caught and recorded/dealt with properly, but the key part is that we're initializing `_initializationResult` to the result of the method we passed in on construction. This is our generic type, which we've seen is of type `IOrchardHost`. 
+Most of this is just concerned with making sure that this is run asynchronously (and working with the previously mentioned module) and that any errors which result are caught and recorded/dealt with properly, but the key part is that we're initializing `_initializationResult` to the result of the method we passed in on construction. This is our generic type, which we've seen is of type `IOrchardHost`. 
 
 This is important - this is the host that's going to be the root of our Orchard application &mdash; anything that happens in Orchard is going to happen as a result of calls in to this root object and the objects it will create and maintain. It's stored in the `Starter<T>` which in turn is a static member of our web application, so the lifetime for this root object is the same as the application itself.
 
@@ -94,9 +94,11 @@ private static IOrchardHost HostInitialization(HttpApplication application) {
 
 We're getting our `IOrchardHost` instance by calling `OrchardStarter.CreateHost`. This is where the meat of our object instantiation is going to happen. It's also the first place that we see another key element of Orchard, the use of *IoC*.
 
+<aside>
+
 If you're not familiar with IoC that's a pretty big topic in its own right, and I'm not about to go in to a lengthy discussion of that &mdash; these articles are plenty long enough on their own. Martin Fowler has written a solid and detailed explanation of the principles of [Dependency Injection][] which covers IoC, and the [Autofac Wiki][] has plenty of information about IoC and Autofac (the IoC container which Orchard uses under the hood). It'll probably help to understand IoC when working with Orchard.
 
-
+</aside>
 
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
 [Dependency Injection]: http://martinfowler.com/articles/injection.html
