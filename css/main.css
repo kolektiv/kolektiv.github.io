@@ -125,6 +125,13 @@ article p {
     margin: 0 0 20px 0;
 }
 
+article aside {
+    background-color: rgb(255, 255, 210);
+    margin: 0 -10px;
+    padding: 9px;
+    border: 1px dashed #ddd;
+}
+
 article p:last-child {
     margin: 0;
 }
@@ -151,7 +158,7 @@ article p a:hover {
 .highlight pre {
     background-color: #fff;
     margin: 0 -10px 20px -10px;
-    padding: 10px;
+    padding: 9px;
     border: 1px solid #ddd;
     line-height: 16px;
     overflow: scroll;
