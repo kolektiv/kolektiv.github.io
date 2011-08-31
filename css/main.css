@@ -127,7 +127,7 @@ article p {
 
 article aside {
     background-color: rgb(255, 255, 210);
-    margin: 0 -11px;
+    margin: 0 -11px 20px -11px;
     padding: 10px;
     border: 1px dashed #ddd;
 }

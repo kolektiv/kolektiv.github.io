@@ -111,7 +111,7 @@ public static IOrchardHost CreateHost(Action<ContainerBuilder> registrations) {
 
 {% endhighlight %}
 
-It gets an IoC container by calling `CreateHostContainer` and then asks that container for an instance of `IOrchardHost`. `CreateHostContainer` (which I won't give source for here, but it's a very useful place to look if you're wondering what implentation of an interface is used by default) registers all of the default dependencies that Orchard needs to run &mdash; all of the dependencies needed to create an `IOrchardHost`. So we can see that IoC is key to Orchard &mdash; there's no manual creation of object graphs here, just IoC being used satisfy all of the dependencies at runtime.
+It gets an IoC container by calling `CreateHostContainer` and then asks that container for an instance of `IOrchardHost`. `CreateHostContainer` (which I won't give source for here, but it's a very useful place to look if you're wondering what implentation of an interface is used by default) registers all of the default dependencies that Orchard needs to run &mdash; all of the dependencies needed to create an `IOrchardHost`. So we can see that IoC is key to Orchard &mdash; there's no manual creation of object graphs here, just IoC being used to satisfy all of the dependencies at runtime.
 
 This is also a really useful place to look if you're wondering about the lifecycle of any of the components of Orchard. It's likely that they're registered here, with the lifecycle being managed by the IoC container (Autofac is very good in this regard). 
 
