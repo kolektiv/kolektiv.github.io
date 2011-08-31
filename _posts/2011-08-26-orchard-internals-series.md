@@ -14,8 +14,10 @@ I should note now that I'm not on the Orchard team &mdash; I didn't write any of
 Posts will be listed below as they're added...
 
 1. [Orchard Startup][]
+2. [Orchard Host][]
 
 If you've got any suggestions for areas you'd like me to cover, corrections, thoughts, etc. just drop me an email (see the Contact page) or say hello on Twitter, etc.
 
 [Orchard CMS]: http://www.orchardproject.net
 [Orchard Startup]: /orchard/2011/08/30/orchard-startup-process.html
+[Orchard Host]: /orchard/2011/09/01/orchard-host.html

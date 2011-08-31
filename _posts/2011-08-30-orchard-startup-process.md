@@ -111,8 +111,39 @@ public static IOrchardHost CreateHost(Action<ContainerBuilder> registrations) {
 
 {% endhighlight %}
 
-It gets an IoC container by calling `CreateHostContainer` and then asks that container for an instance of `IOrchardHost`. `CreateHostContainer` (which I won't give source for here, but it's a very useful place to look if you're wondering what implentation of an interface is used by default) registers all of the default dependencies that Orchard needs to run &mdash; all of the dependencies needed to create an `IOrchardHost`. So we can see that IoC is key to Orchard &mdash; there's no manual creation of object graphs here, just IoC being used to satisfy all of the dependencies at runtime.
+It gets an IoC container by calling `CreateHostContainer` and then asks that container for an instance of `IOrchardHost`. `CreateHostContainer` (which I won't give source for here, but it's a very useful place to look if you're wondering what implentation of an interface is used by default) registers all of the default dependencies that Orchard needs to run &mdash; all of the dependencies needed to create an `IOrchardHost`. So we can see that IoC is key to Orchard &mdash; there's no manual creation of object graphs here, just IoC being used to satisfy all of the dependencies at runtime. 
 
 This is also a really useful place to look if you're wondering about the lifecycle of any of the components of Orchard. It's likely that they're registered here, with the lifecycle being managed by the IoC container (Autofac is very good in this regard). 
 
+## DefaultOrchardHost
+
+At this point, if all has gone well, we have an instance of `IOrchardHost`. Looking at `CreateHostContainer` we can see that this will actually be an instance of `DefaultOrchardHost` &mdash; that's the type which has been registered for this interface. Now we can go back to our web application in **global.asax.cs** and wrap up the tour of the startup process by looking what happens to our host.
+
+{% highlight csharp %}
+
+private static IOrchardHost HostInitialization(HttpApplication application) {
+    var host = OrchardStarter.CreateHost(MvcSingletons);
+
+    host.Initialize();
+
+    // initialize shells to speed up the first dynamic query
+    host.BeginRequest();
+    host.EndRequest();
+
+    return host;
+}
+
+{% endhighlight %}
+
+Looking again at our host initialization code, we can see that we call `Initialize` on our host. That's pretty much it &mdash; the other calls on our host here are just there for performance reasons and aren't really relevant to our startup process.
+
+## Wrapping Up
+
+So we've been through the startup procedure and seen how Orchard creates the runtime environment. We haven't looked at the actual host much yet &mdash; we'll look at that in the next article in this series, but we have seen how a host is constructed so we can probably have a guess that by now our host has all of the dependencies it needs and is ready to start handling Orchard requests.
+
+We've also seen where to find the default registrations and lifecycles for the core Orchard components and how those are made available to the host.
+
+We're now ready to start taking a deep dive in to the [Orchard Host][].
+
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
+[Orchard Host]: /orchard/2011/09/01/orchard-host.html
