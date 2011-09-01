@@ -13,7 +13,7 @@ Orchard does a lot when it starts up. Although it's an ASP.NET MVC 3 web applica
 
 ## The Web Application
 
-Everything starts off in the web application itself. If you've got the source code handy, this is the **Orchard.Web** project. Looking in here we see... not a lot. This is because Orchard only really uses this as a boot up point for the application proper. There's no content in here or traditional models, controllers and views &mdash; only the code needed to call out to Orchard and get things running.
+Everything starts off in the web application itself. If you've got the [source code][Orchard Source] handy (and these articles will make much more sense if you have), this is the **Orchard.Web** project. Looking in here we see... not a lot. This is because Orchard only really uses this as a boot up point for the application proper. There's no content in here or traditional models, controllers and views &mdash; only the code needed to call out to Orchard and get things running.
 
 If we look in the **global.asax.cs** file of the Orchard.Web project, this is where we'll find our Orchard code. We don't have some of the code which would normally be present in a default ASP.NET MVC 3 web app &mdash; there's no registration of Areas or Filters in here as Orchard deals with these itself. It doesn't map any Routes either, only ignoring the Route for resource.axd, as Orchard deals with Routes too.
 
@@ -147,3 +147,4 @@ We're now ready to start taking a deep dive in to the [Orchard Host][].
 
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
 [Orchard Host]: /orchard/2011/09/01/orchard-host.html
+[Orchard Source]: http://orchard.codeplex.com/releases/
