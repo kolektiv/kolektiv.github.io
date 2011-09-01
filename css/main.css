@@ -120,9 +120,14 @@ article section {
     padding: 0;
 }
 
-article p {
+article p, article ol {
     padding: 0;
     margin: 0 0 20px 0;
+}
+
+article ol {
+    list-style-position: inside;
+    color: #999;
 }
 
 article aside {
@@ -136,14 +141,14 @@ article p:last-child {
     margin: 0;
 }
 
-article p a {
+article p a, article ol a {
     color: #333;
     border-bottom: 1px dashed #ccc;
     margin: 0;
     padding: 0;
 }
 
-article p a:hover {
+article p a:hover, article ol a:hover {
     background-color: transparent;
     padding: 0;
     margin: 0;
