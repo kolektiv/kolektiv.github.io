@@ -141,14 +141,14 @@ article p:last-child {
     margin: 0;
 }
 
-article p a, article ol a, article ul a {
+article p a, article ol a, article ul a, .vcard a {
     color: #333;
     border-bottom: 1px dashed #ccc;
     margin: 0;
     padding: 0;
 }
 
-article p a:hover, article ol a:hover, article ul a:hover {
+article p a:hover, article ol a:hover, article ul a:hover, .vcard a:hover {
     background-color: transparent;
     padding: 0;
     margin: 0;
@@ -173,6 +173,16 @@ article ul.hfeed .entry-title {
 
 article ul.hfeed .entry-title a:hover:after {
     content: "";
+}
+
+.vcard p {
+    margin-top: 20px;
+}
+
+.vcard dt {
+    width: 120px;
+    color: #666;
+    float: left;
 }
 
 /* @end */
