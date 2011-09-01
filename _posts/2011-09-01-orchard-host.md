@@ -15,7 +15,7 @@ In [part 1][Orchard Startup] of this series we looked at the startup process in 
 
 Let's go and have a look at `DefaultOrchardHost` &mdash; it's in the **Orchard.Framework** project in **Environment/DefaultOrchardHost.cs**. It's a good job Orchard is using IoC to create instances of this &mdash; looking at the constructor it probably wouldn't be fun to manage that many dependencies manually!
 
-We say that `Initialize` gets called as part of the startup process - that's pretty simple, and aside from some logging it just calls `BuildCurrent`. That looks a bit more interesting though, like this:
+We saw that `Initialize` gets called as part of the startup process - that's pretty simple, and aside from some logging it just calls `BuildCurrent`. That looks a bit more interesting though, like this:
 
 {% highlight csharp %}
 
