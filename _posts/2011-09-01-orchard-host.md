@@ -15,7 +15,7 @@ In [part 1][Orchard Startup] of this series we looked at the startup process in 
 
 Let's go and have a look at `DefaultOrchardHost` &mdash; it's in the **Orchard.Framework** project in **Environment/DefaultOrchardHost.cs**. It's a good job Orchard is using IoC to create instances of this &mdash; looking at the constructor it probably wouldn't be fun to manage that many dependencies manually!
 
-We saw that `Initialize` gets called as part of the startup process - that's pretty simple, and aside from some logging it just calls `BuildCurrent`. That looks a bit more interesting though, like this:
+We saw that `Initialize` gets called as part of the startup process &mdash; that's pretty simple, and aside from some logging it just calls `BuildCurrent`. That looks a bit more interesting though, like this:
 
 {% highlight csharp %}
 
@@ -34,7 +34,7 @@ IEnumerable<ShellContext> BuildCurrent() {
 
 {% endhighlight %}
 
-We'll ignore the locking as that's pretty self-explanatory - we only want to initialize `_current` once regardless of threading. So we're left with a couple of calls relating to extensions, and then a call which creates "some" `ShellContext`s. It looks like there's a lot to this &mdash; we'll take a look at extensions first.
+We'll ignore the locking as that's self-explanatory &mdash; we only want to initialize `_current` once regardless of threading. So we're left with a couple of calls relating to extensions, and then a call which creates "some" `ShellContext`s. It looks like there's a lot to this &mdash; we'll take a look at extensions first.
 
 ## Extensions
 
