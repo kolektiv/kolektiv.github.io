@@ -14,7 +14,12 @@ I should note now that I'm not on the Orchard team &mdash; I didn't write any of
 Posts will be listed below as they're added...
 
 1. [The Orchard Startup Process][Orchard Startup]
-2. [The Orchard Host][Orchard Host]
+2. [The Orchard Host][Orchard Host] (in progress)
+3. Request Lifecycle in Orchard
+4. Orchard Extensions Mechanics
+5. ...
+
+Note that if something says it's "in progress", that pretty much means I'm writing it in public and I haven't finished yet. Sometimes it takes me a few days to write things, other times I rattle through in an hour, but I quite like just getting something up even if it's not finished. If something just stops half way through, come back and check whether I'm writing as you're reading...
 
 If you've got any suggestions for areas you'd like me to cover, corrections, thoughts, etc. just drop me an email (see the Contact page) or say hello on Twitter, etc.
 
