@@ -167,7 +167,7 @@ article p a:hover, article ol a:hover {
     border: 1px solid #ddd;
     line-height: 16px;
     overflow: scroll;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: visible;
 }
 
