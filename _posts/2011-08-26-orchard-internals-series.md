@@ -9,7 +9,7 @@ Lately I've been doing quite a bit of work with the [Orchard CMS][]. It's a powe
 
 While [the documentation][Orchard Documentation] is pretty good, I find that it helps me to really understand the internals of a system I'm using, especially when &mdash; like Orchard &mdash; it does quite a lot based on convention and "magic". So I'll be writing a series here which is a crawl around some of the Orchard internals examining how it works and which bits do what. It helps me to understand the system better, and hopefully it'll have some value for other developers that want to better understand Orchard and push the limits of what can be done with it.
 
-I should note now that I'm not on the Orchard team &mdash; I didn't write any of this code, so if I misunderstand the logic behind any, apologies in advance. I'll happily correct it if someone lets me know.
+I should note now that I'm not on the Orchard team &mdash; I didn't write any of this code, so if I misunderstand it, apologies in advance. I'll happily make corrections where errors or inclarity are pointed out.
 
 Posts will be listed below as they're added...
 
