@@ -141,19 +141,38 @@ article p:last-child {
     margin: 0;
 }
 
-article p a, article ol a {
+article p a, article ol a, article ul a {
     color: #333;
     border-bottom: 1px dashed #ccc;
     margin: 0;
     padding: 0;
 }
 
-article p a:hover, article ol a:hover {
+article p a:hover, article ol a:hover, article ul a:hover {
     background-color: transparent;
     padding: 0;
     margin: 0;
     color: #333;
     border-bottom: 1px solid #333;
+}
+
+article ul.hfeed {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+article ul.hfeed li {
+    clear: left;
+    padding: 0;
+}
+
+article ul.hfeed .entry-title {
+    margin: 0;
+}
+
+article ul.hfeed .entry-title a:hover:after {
+    content: "";
 }
 
 /* @end */
