@@ -110,5 +110,7 @@ The final case is having *more than one* instance. For this to happen we'd need 
 
 Multi-tenancy is another big topic to cover, and it will get an article all to itself later on, but if you're curious now, the **Orchard.MultiTenancy** project (module) is where the magic happens for this. For now, we'll take it as read that we might have multiple shells running,  allowing us to run multiple distinct sites within one instance of Orchard.
 
+(This article is a work in progress, check back soon for the rest!)
+
 [Orchard Startup]: /orchard/2011/08/30/orchard-startup-process.html
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
