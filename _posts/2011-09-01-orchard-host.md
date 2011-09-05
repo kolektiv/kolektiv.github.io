@@ -46,7 +46,7 @@ I'm not going to dive in to the details of the extension discovery, compilation 
 
 That's simplifying quite a large and complex process, but it's enough to give us a feel for what's happening at the host level. We can now move on to the last key line of `BuildCurrent`, the call to `CreateAndActivate`.
 
-## Shells
+## Orchard Shells
 
 Let's start by looking at that `CreateAndActivate` method:
 
@@ -109,6 +109,68 @@ The first case, where we have no instances of `ShellSettings`, is simple. The Or
 The final case is having *more than one* instance. For this to happen we'd need to have more than one site set up in our **Sites** directory. Why would we have this? This would be the case if we were running Orchard with multi-tenancy enabled, and we'd set up multiple tenants for our Orchard site. Each tenant would be another directory in **Sites** with separate settings. By default Orchard doesn't load this module, but it can be turned on like any other if it's installed.
 
 Multi-tenancy is another big topic to cover, and it will get an article all to itself later on, but if you're curious now, the **Orchard.MultiTenancy** project (module) is where the magic happens for this. For now, we'll take it as read that we might have multiple shells running,  allowing us to run multiple distinct sites within one instance of Orchard.
+
+<aside>
+<p>
+A shell has a one to one correspondence with a tenant in Orchard, so if you're running a multi-tenanted site, be aware that things are generally "shell local" &mdash; you won't be sharing instances across tenants, generally. If tenants need to talk to each other, you might need to write your own way of doing that! 
+</p>
+</aside>
+
+Now we that've seen where shell settings might come from (and why) let's take a look at what happens when shells are created and initialized. Back to our `DefaultOrchardHost` implementation...
+
+## ShellContextFactory
+
+We saw earlier that our shell contexts (instances of `ShellContext`) are created by calling either `CreateSetupContext` (where we have no shell settings) or `CreateShellContext` (where we do have shell settings). Both of these methods make calls to `_shellContextFactory`, an instance of `IShellContextFactory`, which in this case is implemented by `ShellContextFactory`. We call either `CreateSetupContext` or `CreateShellContext` on that instance, depending on whether or not we have settings (or if the settings we have say they haven't been initialized yet).
+
+Let's go and take a look in `ShellContextFactory`, which can be found in **ShellBuilders/ShellContextFactory.cs**. It's worth looking at what happens in here as it's key to allowing Orchard to work the way it does with regard to IoC, and understanding that can save real problems down the line, especially when working with multiple tenants.
+
+We'll take our usual stance of ignoring logging and that kind of thing, but we'll compare the two methods that are called, `CreateShellContext` and `CreateSetupContext`. Let's look at the start of both.
+
+`CreateShellContext`:
+
+{% highlight csharp %}
+
+Logger.Debug("Creating shell context for tenant {0}", settings.Name);
+
+var knownDescriptor = _shellDescriptorCache.Fetch(settings.Name);
+if (knownDescriptor == null) {
+    Logger.Information("No descriptor cached. Starting with minimum components.");
+    knownDescriptor = MinimumShellDescriptor();
+}
+
+{% endhighlight %} 
+
+and `CreateSetupContext`:
+
+{% highlight csharp %}
+
+Logger.Warning("No shell settings available. Creating shell context for setup");
+
+var descriptor = new ShellDescriptor {
+    SerialNumber = -1,
+    Features = new[] {
+        new ShellFeature { Name = "Orchard.Setup" },
+        new ShellFeature { Name = "Shapes" },
+        new ShellFeature { Name = "Orchard.jQuery" },
+    },
+};
+
+{% endhighlight %}
+
+The obvious point here is that in a setup context we're creating a new descriptor for the shell we're creating, with only the features (modules) required to run the setup process, and to create a tenant for future use. Where we already have a tenant set up, we expect that we can get a shell descriptor from our cache, but if not we create one which is the minimum required at this stage. (At this point it's worth noting that a shell descriptor is basically a list of some metadata about a shell/tenant, such as the name, a unique identifier, and a list of features which should be enabled when available).
+
+Once we've got a shell descriptor, let's see what happens to it:
+
+{% highlight csharp %}
+
+var blueprint = _compositionStrategy.Compose(settings, descriptor);
+var shellScope = _shellContainerFactory.CreateContainer(settings, blueprint);
+
+{% endhighlight %}
+
+Those lines are the same in both methods (except for the name of the descriptor instance which is passed in &mdash these lines were taken from `CreateSetupContext`).
+
+Now we're getting to the critical part of the shell architecture.
 
 (This article is a work in progress, check back soon for the rest!)
 
