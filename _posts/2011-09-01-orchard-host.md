@@ -208,7 +208,7 @@ This looks a little bit daunting at first glance &mdash; the `BuildBlueprint` me
 
 Once that's done, we start to call `BuildBlueprint`. While it's called with various arguments and functions, it's always doing roughly the same thing &mdash; building up a specification of what dependencies need to be registered for this shell. It does this through assembly scanning for certain types, with specific bits of logic for the varying things that might need to be registered (checking for a valid controller, a valid dependency). Once that's done we end up with an aggregation of all of the types of dependencies that this shell is going to need, based on the features that have been described.
 
-This is now what we need to actually build our shell scope through the call we saw earlier to `shellContainerFactory.CreateContainer`.
+This is now what we need to actually build our shell scope through the call we saw earlier to `_shellContainerFactory.CreateContainer`.
 
 <aside>
 <p>
@@ -216,7 +216,48 @@ At this point it's probably a good idea to make sure you're familiar with the co
 </p>
 </aside>
 
+That call to `CreateContainer` gives us an Autofac `ILifetimeScope` back, and that becomes a crucial part of our shell context. It means that pretty much anything the tenant needs to resolve (including the shell itself as we create a new `ShellContext` instance) will be resolved at the level of the shell lifetime scope, giving segregation and the possibility of very different configurations and loaded features between tenants.
 
+The `ShellContainerFactory` class (**ShellBuilders/ShellContainerFactory.cs**) is the implementation used to build our `ILifetimeScope` from our shell settings and shell blueprint. It's worth a read through but I'm not going to go through it all here &mdash; there's quite a lot of code, most of which will be quickly readable if you're familiar with Autofac. It is worth pulling out one part though, which is where we see how Orchard lets you implement your own dependencies with modules (and control their lifetimes).
+
+This code (around line 66 onwards) is **important**:
+
+{% highlight csharp%}
+
+foreach (var interfaceType in item.Type.GetInterfaces()
+    .Where(itf => typeof(IDependency).IsAssignableFrom(itf) 
+               && !typeof(IEventHandler).IsAssignableFrom(itf))) {
+    registration = registration.As(interfaceType);
+    if (typeof(ISingletonDependency).IsAssignableFrom(interfaceType)) {
+        registration = registration.InstancePerMatchingLifetimeScope("shell");
+    } 
+    else if (typeof(IUnitOfWorkDependency).IsAssignableFrom(interfaceType)) {
+        registration = registration.InstancePerMatchingLifetimeScope("work");
+    }
+    else if (typeof(ITransientDependency).IsAssignableFrom(interfaceType)) {
+        registration = registration.InstancePerDependency();
+    }
+}
+
+{% endhighlight %}
+
+This is where Orchard is looking for the interfaces you might implement when creating your own modules with dependencies that you wish to make available through IoC. We can see clearly here how implementing `IDependency`, or `ISingletonDependency` willimpact the registration of the type you provide within the scope of the shell. It's also useful to remember for the future - if you need to one day extend the Orchard core to deal with more complex registrations and scope within the IoC container, this would be the place to start (although it's unlikely that's going to be needed for most people!)
+
+We can now go back to our `ShellContextFactory`. When we're creating a setup context, we're basically done now. The last part of that method looks like this:
+
+{% highlight csharp %}
+
+return new ShellContext {
+    Settings = settings,
+    Descriptor = descriptor,
+    Blueprint = blueprint,
+    LifetimeScope = shellScope,
+    Shell = shellScope.Resolve<IOrchardShell>(),
+};
+
+{% endhighlight %} 
+
+We can see that we're storing our scope in there, and we're also creating our actual shell instance by resolving an `IOrchardShell` &mdash; and importantly we're doing that in our newly created scope, meaning that we've got just the right registrations and setup for our tenant, isolated from other tenants and their own shells.
 
 (This article is a work in progress, check back soon for the rest!)
 
