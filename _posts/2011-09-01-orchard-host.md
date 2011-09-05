@@ -247,7 +247,7 @@ This is where Orchard is looking for the interfaces you would implement when cre
 <p>
 <strong>Note</strong>: if you're used to Autofac you'll be used to the default scope of a registration being `InstancePerDependency`, so you might assume that this is what you'd get if you implemented `IDependency` in Orchard. It's not though, the default in Orchard is a LifetimeScope which is the scope of a Request. To get the normal Autofac behaviour of an instance per dependency you should implement `ITransientDependency`.
 </p>
-</aside
+</aside>
 
 We can now go back to our `ShellContextFactory`. When we're creating a setup context, we're basically done now. The last part of that method looks like this:
 
