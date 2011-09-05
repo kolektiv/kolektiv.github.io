@@ -5,7 +5,7 @@ categories:
 - orchard
 ---
 
-This is part 2 of a series on [Orchard Internals][]. See [the introductory post][Orchard Internals] for previous posts (and a full post listing).
+This is part 3 of a series on [Orchard Internals][]. See [the introductory post][Orchard Internals] for previous posts (and a full post listing).
 
 ## Overview
 
@@ -72,6 +72,8 @@ Not too much going on &mdash; publishing the routes and model binders which are 
 ## Routes and Shells
 
 As we can see, routes are published on a per shell basis, so routes can be different between tenants. We also know from the [first article][Orchard Startup] that routes are not registered as part of our main web application as they often are in ASP.NET MVC web applications.
+
+
 
 [Orchard Host]: /orchard/2011/09/01/orchard-host.html
 [Orchard Startup]: /orchard/2011/08/30/orchard-startup-process.html
