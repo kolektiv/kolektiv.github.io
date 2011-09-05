@@ -243,6 +243,12 @@ foreach (var interfaceType in item.Type.GetInterfaces()
 
 This is where Orchard is looking for the interfaces you would implement when creating your own module containing dependencies that you wish to make available through IoC. We can see clearly here how implementing `IDependency`, or `ISingletonDependency` will impact the registration of the type you provide within the scope of the shell. It's also useful to remember for the future &mdash; if you need to one day extend the Orchard core to deal with more complex registrations and scope within the IoC container this would be the place to start (although it's unlikely that's going to be needed for most people!)
 
+<aside>
+<p>
+<strong>Note</strong>: if you're used to Autofac you'll be used to the default scope of a registration being `InstancePerDependency`, so you might assume that this is what you'd get if you implemented `IDependency` in Orchard. It's not though, the default in Orchard is a LifetimeScope which is the scope of a Request. To get the normal Autofac behaviour of an instance per dependency you should implement `ITransientDependency`.
+</p>
+</aside
+
 We can now go back to our `ShellContextFactory`. When we're creating a setup context, we're basically done now. The last part of that method looks like this:
 
 {% highlight csharp %}
