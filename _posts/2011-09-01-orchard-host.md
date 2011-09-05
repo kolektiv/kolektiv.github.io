@@ -112,11 +112,11 @@ Multi-tenancy is another big topic to cover, and it will get an article all to i
 
 <aside>
 <p>
-A shell has a one to one correspondence with a tenant in Orchard, so if you're running a multi-tenanted site, be aware that things are generally "shell local" &mdash; you won't be sharing instances across tenants, generally. If tenants need to talk to each other, you might need to write your own way of doing that! 
+A shell has a one to one correspondence with a tenant in Orchard, so if you're running a multi-tenanted site, be aware that things are generally "shell local" &mdash; you won't usually be sharing instances across tenants. If tenants need to talk to each other, you might need to write your own way of doing that! 
 </p>
 </aside>
 
-Now we that've seen where shell settings might come from (and why) let's take a look at what happens when shells are created and initialized. Back to our `DefaultOrchardHost` implementation...
+Now that we've seen where shell settings might come from (and why) let's take a look at what happens when shells are created and initialized. Back to our `DefaultOrchardHost` implementation...
 
 ## ShellContextFactory
 
@@ -241,7 +241,7 @@ foreach (var interfaceType in item.Type.GetInterfaces()
 
 {% endhighlight %}
 
-This is where Orchard is looking for the interfaces you might implement when creating your own modules with dependencies that you wish to make available through IoC. We can see clearly here how implementing `IDependency`, or `ISingletonDependency` willimpact the registration of the type you provide within the scope of the shell. It's also useful to remember for the future - if you need to one day extend the Orchard core to deal with more complex registrations and scope within the IoC container, this would be the place to start (although it's unlikely that's going to be needed for most people!)
+This is where Orchard is looking for the interfaces you would implement when creating your own module containing dependencies that you wish to make available through IoC. We can see clearly here how implementing `IDependency`, or `ISingletonDependency` will impact the registration of the type you provide within the scope of the shell. It's also useful to remember for the future &mdash; if you need to one day extend the Orchard core to deal with more complex registrations and scope within the IoC container this would be the place to start (although it's unlikely that's going to be needed for most people!)
 
 We can now go back to our `ShellContextFactory`. When we're creating a setup context, we're basically done now. The last part of that method looks like this:
 
@@ -259,7 +259,51 @@ return new ShellContext {
 
 We can see that we're storing our scope in there, and we're also creating our actual shell instance by resolving an `IOrchardShell` &mdash; and importantly we're doing that in our newly created scope, meaning that we've got just the right registrations and setup for our tenant, isolated from other tenants and their own shells.
 
-(This article is a work in progress, check back soon for the rest!)
+We can finish up looking at shell and shell context creation now by just tying up a loose end &mdash; the other difference between a seup context and a normal shell context. The following code appears in `CreateShellContext` before we return a newly created `ShellContext` with our shell scope:
+
+{% highlight csharp %}
+
+ShellDescriptor currentDescriptor;
+using (var standaloneEnvironment = shellScope.CreateWorkContextScope()) {
+    var shellDescriptorManager = standaloneEnvironment.Resolve<IShellDescriptorManager>();
+    currentDescriptor = shellDescriptorManager.GetShellDescriptor();
+}
+
+if (currentDescriptor != null && knownDescriptor.SerialNumber != currentDescriptor.SerialNumber) {
+    Logger.Information("Newer descriptor obtained. Rebuilding shell container.");
+
+    _shellDescriptorCache.Store(settings.Name, currentDescriptor);
+    blueprint = _compositionStrategy.Compose(settings, currentDescriptor);
+    shellScope = _shellContainerFactory.CreateContainer(settings, blueprint);
+}
+
+{% endhighlight %}
+
+At this point we check if there's actually a more up to date shell descriptor already in the environment. If there is, we recompose our blueprint and construct a new shell scope to use rather than the one we got from our shell descriptor cache.
+
+From then on, we're back to just returning our newly created shell context, with a shell resolved from the new shell scope.
+
+## DefaultOrchardHost
+
+Finally (this has been a rather long article) we can take ourselves back to our `DefaultOrchardHost`, and see that the only important thing that happens now is our callto `ActivateShell`. That looks like this: 
+
+{% highlight csharp %}
+
+private void ActivateShell(ShellContext context) {
+    context.Shell.Activate();
+    _runningShellTable.Add(context.Settings);
+}
+
+{% endhighlight %}
+
+We can see that we're actually calling `Activate` on our instance of `IOrchardShell`, before registering that shell in our table of running shells.
+
+While we could start to dive in to what activating a shell means, I think that's best served with a separate article &mdash; this one is more than long enough. So let's wrap that up there. We've seen how shells and shell contexts get created based on the site/tenant settings in our **App_Data/Sites** directory, and we've seen how the settings there go towards making up an IoC scope for the shell and context.
+
+We've also seen how the dependencies we create in our own custom modules get registered with the underlying shell and scope, so we know what we can do by default with Orchard for dependency specification.
+
+Next up we'll look at activating the shell, so check back to the [main introductor post and the list of articles][Orchard Internals] to see when that gets posted (or subscribe to the [Atom feed][Atom] if that's you're thing).
 
 [Orchard Startup]: /orchard/2011/08/30/orchard-startup-process.html
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
+[Atom]: /atom.xml
