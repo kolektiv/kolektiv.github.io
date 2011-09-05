@@ -74,4 +74,5 @@ Not too much going on &mdash; publishing the routes and model binders which are 
 As we can see, routes are published on a per shell basis, so routes can be different between tenants. We also know from the [first article][Orchard Startup] that routes are not registered as part of our main web application as they often are in ASP.NET MVC web applications.
 
 [Orchard Host]: /orchard/2011/09/01/orchard-host.html
+[Orchard Startup]: /orchard/2011/08/30/orchard-startup-process.html
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
