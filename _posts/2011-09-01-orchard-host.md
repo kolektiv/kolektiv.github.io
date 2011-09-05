@@ -170,7 +170,53 @@ var shellScope = _shellContainerFactory.CreateContainer(settings, blueprint);
 
 Those lines are the same in both methods (except for the name of the descriptor instance which is passed in &mdash; these lines were taken from `CreateSetupContext`).
 
-Now we're getting to the critical part of the shell architecture.
+Now we're getting to the critical part of the shell architecture. First of all, ww create a `ShellBlueprint`, by calling `Compose` on our `_compositionStrategy` instance, passing in our settings and the descriptor that we've just created or acquired. Whatis that actually creating at this point? To find out, we'll have a quick glance in to **ShellBuilders/CompositionStrategy.cs** which is where we find `CompositionStrategy`, the implementation of `ICompositionStrategy` in use here.
+
+The `Compose` method looks like this:
+
+{% highlight csharp %}
+
+public ShellBlueprint Compose(ShellSettings settings, ShellDescriptor descriptor) {
+    Logger.Debug("Composing blueprint");
+
+    var enabledFeatures = _extensionManager.EnabledFeatures(descriptor);
+    var features = _extensionManager.LoadFeatures(enabledFeatures);
+
+    if (descriptor.Features.Any(feature => feature.Name == "Orchard.Framework"))
+        features = features.Concat(BuiltinFeatures());
+
+    var modules = BuildBlueprint(features, IsModule, BuildModule);
+    var dependencies = BuildBlueprint(features, IsDependency, (t, f) => BuildDependency(t, f, descriptor));
+    var controllers = BuildBlueprint(features, IsController, BuildController);
+    var records = BuildBlueprint(features, IsRecord, (t, f) => BuildRecord(t, f, settings));
+
+    var result = new ShellBlueprint {
+        Settings = settings,
+        Descriptor = descriptor,
+        Dependencies = dependencies.Concat(modules).ToArray(),
+        Controllers = controllers,
+        Records = records,
+    };
+
+    Logger.Debug("Done composing blueprint");
+    return result;
+}
+
+{% endhighlight %}
+
+This looks a little bit daunting at first glance &mdash; the `BuildBlueprint` method throwing generics and Func<> around all over the place but it isn't as complicated as it seems. In fact almost everything here is about working out what dependencies need to be registered with our IoC container so that the shell can provide any dependencies as they're needed &mdash; for the right tenant and with the right *scope*. First of all there's some checking to see which features in our descriptor are actually available through the extension manager (and recording the ones that are). Next we make sure that if **Orchard.Framework** is required, all of the built in features from that project are recorded as being required too.
+
+Once that's done, we start to call `BuildBlueprint`. While it's called with various arguments and functions, it's always doing roughly the same thing &mdash; building up a specification of what dependencies need to be registered for this shell. It does this through assembly scanning for certain types, with specific bits of logic for the varying things that might need to be registered (checking for a valid controller, a valid dependency). Once that's done we end up with an aggregation of all of the types of dependencies that this shell is going to need, based on the features that have been described.
+
+This is now what we need to actually build our shell scope through the call we saw earlier to `shellContainerFactory.CreateContainer`.
+
+<aside>
+<p>
+At this point it's probably a good idea to make sure you're familiar with the concepts of Lifetime/Scope in Autofac if you want this to make good sense. It's not trivial but it is rather well defined and Nick Blumhardt has an excellent article laying it all out: <a href="http://nblumhardt.com/2011/01/an-autofac-lifetime-primer/">An Autofac Lifetime Primer</a>. It's worth reading that if you really want to understand Orchard Internals &mdash; Orchard is using Autofac directly in this area.
+</p>
+</aside>
+
+
 
 (This article is a work in progress, check back soon for the rest!)
 
