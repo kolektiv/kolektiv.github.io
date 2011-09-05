@@ -122,11 +122,11 @@ Now we that've seen where shell settings might come from (and why) let's take a 
 
 We saw earlier that our shell contexts (instances of `ShellContext`) are created by calling either `CreateSetupContext` (where we have no shell settings) or `CreateShellContext` (where we do have shell settings). Both of these methods make calls to `_shellContextFactory`, an instance of `IShellContextFactory`, which in this case is implemented by `ShellContextFactory`. We call either `CreateSetupContext` or `CreateShellContext` on that instance, depending on whether or not we have settings (or if the settings we have say they haven't been initialized yet).
 
-Let's go and take a look in `ShellContextFactory`, which can be found in **ShellBuilders/ShellContextFactory.cs**. It's worth looking at what happens in here as it's key to allowing Orchard to work the way it does with regard to IoC, and understanding that can save real problems down the line, especially when working with multiple tenants.
+Let's go and take a look in `ShellContextFactory`, which can be found in **ShellBuilders/ShellContextFactory.cs**. It's worth looking at what happens in here as it's key to allowing Orchard to work the way it does with regard to IoC, and understanding that can save avoid confusion and problems down the line, especially when working with multiple tenants.
 
 We'll take our usual stance of ignoring logging and that kind of thing, but we'll compare the two methods that are called, `CreateShellContext` and `CreateSetupContext`. Let's look at the start of both.
 
-`CreateShellContext`:
+First `CreateShellContext`:
 
 {% highlight csharp %}
 
@@ -168,7 +168,7 @@ var shellScope = _shellContainerFactory.CreateContainer(settings, blueprint);
 
 {% endhighlight %}
 
-Those lines are the same in both methods (except for the name of the descriptor instance which is passed in &mdash these lines were taken from `CreateSetupContext`).
+Those lines are the same in both methods (except for the name of the descriptor instance which is passed in &mdash; these lines were taken from `CreateSetupContext`).
 
 Now we're getting to the critical part of the shell architecture.
 
