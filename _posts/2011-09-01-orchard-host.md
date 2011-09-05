@@ -122,7 +122,7 @@ Now that we've seen where shell settings might come from (and why) let's take a 
 
 We saw earlier that our shell contexts (instances of `ShellContext`) are created by calling either `CreateSetupContext` (where we have no shell settings) or `CreateShellContext` (where we do have shell settings). Both of these methods make calls to `_shellContextFactory`, an instance of `IShellContextFactory`, which in this case is implemented by `ShellContextFactory`. We call either `CreateSetupContext` or `CreateShellContext` on that instance, depending on whether or not we have settings (or if the settings we have say they haven't been initialized yet).
 
-Let's go and take a look in `ShellContextFactory`, which can be found in **ShellBuilders/ShellContextFactory.cs**. It's worth looking at what happens in here as it's key to allowing Orchard to work the way it does with regard to IoC, and understanding that can save avoid confusion and problems down the line, especially when working with multiple tenants.
+Let's go and take a look in `ShellContextFactory`, which can be found in **Environment/ShellBuilders/ShellContextFactory.cs**. It's worth looking at what happens in here as it's key to allowing Orchard to work the way it does with regard to IoC, and understanding that can save avoid confusion and problems down the line, especially when working with multiple tenants.
 
 We'll take our usual stance of ignoring logging and that kind of thing, but we'll compare the two methods that are called, `CreateShellContext` and `CreateSetupContext`. Let's look at the start of both.
 
@@ -170,7 +170,7 @@ var shellScope = _shellContainerFactory.CreateContainer(settings, blueprint);
 
 Those lines are the same in both methods (except for the name of the descriptor instance which is passed in &mdash; these lines were taken from `CreateSetupContext`).
 
-Now we're getting to the critical part of the shell architecture. First of all, we create a `ShellBlueprint`, by calling `Compose` on our `_compositionStrategy` instance, passing in our settings and the descriptor that we've just created or acquired. What is that actually creating at this point? To find out, we'll have a quick glance in to **ShellBuilders/CompositionStrategy.cs** which is where we find `CompositionStrategy`, the implementation of `ICompositionStrategy` in use here.
+Now we're getting to the critical part of the shell architecture. First of all, we create a `ShellBlueprint`, by calling `Compose` on our `_compositionStrategy` instance, passing in our settings and the descriptor that we've just created or acquired. What is that actually creating at this point? To find out, we'll have a quick glance in to **Environment/ShellBuilders/CompositionStrategy.cs** which is where we find `CompositionStrategy`, the implementation of `ICompositionStrategy` in use here.
 
 The `Compose` method looks like this:
 
@@ -218,7 +218,7 @@ At this point it's probably a good idea to make sure you're familiar with the co
 
 That call to `CreateContainer` gives us an Autofac `ILifetimeScope` back, and that becomes a crucial part of our shell context. It means that pretty much anything the tenant needs to resolve (including the shell itself as we create a new `ShellContext` instance) will be resolved at the level of the shell lifetime scope, giving segregation and the possibility of very different configurations and loaded features between tenants.
 
-The `ShellContainerFactory` class (**ShellBuilders/ShellContainerFactory.cs**) is the implementation used to build our `ILifetimeScope` from our shell settings and shell blueprint. It's worth a read through but I'm not going to go through it all here &mdash; there's quite a lot of code, most of which will be quickly readable if you're familiar with Autofac. It is worth pulling out one part though, which is where we see how Orchard lets you implement your own dependencies with modules (and control their lifetimes).
+The `ShellContainerFactory` class (**Environment/ShellBuilders/ShellContainerFactory.cs**) is the implementation used to build our `ILifetimeScope` from our shell settings and shell blueprint. It's worth a read through but I'm not going to go through it all here &mdash; there's quite a lot of code, most of which will be quickly readable if you're familiar with Autofac. It is worth pulling out one part though, which is where we see how Orchard lets you implement your own dependencies with modules (and control their lifetimes).
 
 This code (around line 66 onwards) is **important**:
 
