@@ -170,7 +170,7 @@ var shellScope = _shellContainerFactory.CreateContainer(settings, blueprint);
 
 Those lines are the same in both methods (except for the name of the descriptor instance which is passed in &mdash; these lines were taken from `CreateSetupContext`).
 
-Now we're getting to the critical part of the shell architecture. First of all, ww create a `ShellBlueprint`, by calling `Compose` on our `_compositionStrategy` instance, passing in our settings and the descriptor that we've just created or acquired. Whatis that actually creating at this point? To find out, we'll have a quick glance in to **ShellBuilders/CompositionStrategy.cs** which is where we find `CompositionStrategy`, the implementation of `ICompositionStrategy` in use here.
+Now we're getting to the critical part of the shell architecture. First of all, we create a `ShellBlueprint`, by calling `Compose` on our `_compositionStrategy` instance, passing in our settings and the descriptor that we've just created or acquired. What is that actually creating at this point? To find out, we'll have a quick glance in to **ShellBuilders/CompositionStrategy.cs** which is where we find `CompositionStrategy`, the implementation of `ICompositionStrategy` in use here.
 
 The `Compose` method looks like this:
 
@@ -204,7 +204,7 @@ public ShellBlueprint Compose(ShellSettings settings, ShellDescriptor descriptor
 
 {% endhighlight %}
 
-This looks a little bit daunting at first glance &mdash; the `BuildBlueprint` method throwing generics and Func<> around all over the place but it isn't as complicated as it seems. In fact almost everything here is about working out what dependencies need to be registered with our IoC container so that the shell can provide any dependencies as they're needed &mdash; for the right tenant and with the right *scope*. First of all there's some checking to see which features in our descriptor are actually available through the extension manager (and recording the ones that are). Next we make sure that if **Orchard.Framework** is required, all of the built in features from that project are recorded as being required too.
+This looks a little bit daunting at first glance &mdash; the `BuildBlueprint` method throwing generics and `Func<...>` around all over the place but it isn't as complicated as it seems. In fact almost everything here is about working out what dependencies need to be registered with our IoC container so that the shell can provide any dependencies as they're needed &mdash; for the right tenant and with the right *scope*. First of all there's some checking to see which features in our descriptor are actually available through the extension manager (and recording the ones that are). Next we make sure that if **Orchard.Framework** is required, all of the built in features from that project are recorded as being required too.
 
 Once that's done, we start to call `BuildBlueprint`. While it's called with various arguments and functions, it's always doing roughly the same thing &mdash; building up a specification of what dependencies need to be registered for this shell. It does this through assembly scanning for certain types, with specific bits of logic for the varying things that might need to be registered (checking for a valid controller, a valid dependency). Once that's done we end up with an aggregation of all of the types of dependencies that this shell is going to need, based on the features that have been described.
 
@@ -259,7 +259,7 @@ return new ShellContext {
 
 We can see that we're storing our scope in there, and we're also creating our actual shell instance by resolving an `IOrchardShell` &mdash; and importantly we're doing that in our newly created scope, meaning that we've got just the right registrations and setup for our tenant, isolated from other tenants and their own shells.
 
-We can finish up looking at shell and shell context creation now by just tying up a loose end &mdash; the other difference between a seup context and a normal shell context. The following code appears in `CreateShellContext` before we return a newly created `ShellContext` with our shell scope:
+We can finish up looking at shell and shell context creation now by just tying up a loose end &mdash; the other difference between a setup context and a normal shell context. The following code appears in `CreateShellContext` before we return a newly created `ShellContext` with our shell scope:
 
 {% highlight csharp %}
 
@@ -279,13 +279,13 @@ if (currentDescriptor != null && knownDescriptor.SerialNumber != currentDescript
 
 {% endhighlight %}
 
-At this point we check if there's actually a more up to date shell descriptor already in the environment. If there is, we recompose our blueprint and construct a new shell scope to use rather than the one we got from our shell descriptor cache.
+At this point we check if there's actually a more up to date shell descriptor already in the environment. If there is, we recompose our blueprint and construct a new shell scope to use rather than the one we created with our cached shell descriptor (as well as sticking the descriptor back in the cache so it's there for next time).
 
 From then on, we're back to just returning our newly created shell context, with a shell resolved from the new shell scope.
 
 ## DefaultOrchardHost
 
-Finally (this has been a rather long article) we can take ourselves back to our `DefaultOrchardHost`, and see that the only important thing that happens now is our callto `ActivateShell`. That looks like this: 
+Finally (this has been a rather long article) we can take ourselves back to our `DefaultOrchardHost`, and see that the only really important thing that happens now is our call to `ActivateShell`. That looks like this: 
 
 {% highlight csharp %}
 
@@ -298,11 +298,11 @@ private void ActivateShell(ShellContext context) {
 
 We can see that we're actually calling `Activate` on our instance of `IOrchardShell`, before registering that shell in our table of running shells.
 
-While we could start to dive in to what activating a shell means, I think that's best served with a separate article &mdash; this one is more than long enough. So let's wrap that up there. We've seen how shells and shell contexts get created based on the site/tenant settings in our **App_Data/Sites** directory, and we've seen how the settings there go towards making up an IoC scope for the shell and context.
+While we could start to dive in to what activating a shell means, that's best served with a separate article &mdash; this one is more than long enough. So let's wrap that up there. We've seen how shells and shell contexts get created based on the site/tenant settings in our **App_Data/Sites** directory, and we've seen how the settings there go towards making up an IoC scope for the shell and context.
 
 We've also seen how the dependencies we create in our own custom modules get registered with the underlying shell and scope, so we know what we can do by default with Orchard for dependency specification.
 
-Next up we'll look at activating the shell, so check back to the [main introductor post and the list of articles][Orchard Internals] to see when that gets posted (or subscribe to the [Atom feed][Atom] if that's you're thing).
+Next up we'll look at activating the shell, so check back to the [main introductory post and the list of articles][Orchard Internals] to see when that gets posted (or subscribe to the [Atom feed][Atom] if that's you're thing).
 
 [Orchard Startup]: /orchard/2011/08/30/orchard-startup-process.html
 [Orchard Internals]: /orchard/2011/08/26/orchard-internals-series.html
