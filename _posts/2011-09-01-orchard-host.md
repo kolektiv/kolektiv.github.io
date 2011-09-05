@@ -245,7 +245,7 @@ This is where Orchard is looking for the interfaces you would implement when cre
 
 <aside>
 <p>
-<strong>Note</strong>: if you're used to Autofac you'll be used to the default scope of a registration being `InstancePerDependency`, so you might assume that this is what you'd get if you implemented `IDependency` in Orchard. It's not though, the default in Orchard is a LifetimeScope which is the scope of a Request. To get the normal Autofac behaviour of an instance per dependency you should implement `ITransientDependency`.
+<strong>Note</strong>: if you're used to Autofac you'll be used to the default scope of a registration being `InstancePerDependency`, so you might assume that this is what you'd get if you implemented `IDependency` in Orchard. It's not though &mdash; the default in Orchard is a LifetimeScope which is the scope of a Request. To get the normal Autofac behaviour of an instance per dependency you should implement `ITransientDependency`.
 </p>
 </aside>
 
