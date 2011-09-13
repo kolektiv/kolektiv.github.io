@@ -15,7 +15,7 @@ Posts will be listed below as they're added...
 
 1. [The Orchard Startup Process][Orchard Startup]
 2. [The Orchard Host][Orchard Host]
-3. Orchard Shell Activation
+3. [Orchard Shell Activation][Orchard Shell]
 4. Request Lifecycle in Orchard
 5. Orchard Extensions Mechanics
 6. next...
@@ -28,3 +28,4 @@ If you've got any suggestions for areas you'd like me to cover, corrections, tho
 [Orchard Documentation]: http://www.orchardproject.net/docs/
 [Orchard Startup]: /orchard/2011/08/30/orchard-startup-process.html
 [Orchard Host]: /orchard/2011/09/01/orchard-host.html
+[Orchard Shell]: /orchard/2011/09/13/orchard-shell-activation.html
