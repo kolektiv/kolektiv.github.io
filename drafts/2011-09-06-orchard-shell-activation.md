@@ -73,7 +73,83 @@ Not too much going on &mdash; publishing the routes and model binders which are 
 
 As we can see, routes are published on a per shell basis, so routes can be different between tenants. We also know from the [first article][Orchard Startup] that routes are not registered as part of our main web application as they often are in ASP.NET MVC web applications.
 
+Routes in Orchard are registered by implementing `IRouteProvider` in modules. Looking at that interface, unsurprisingly it implements `IDependency`. This means that `DefaultOrchardShell` can take a constructor dependency on `IEnumerable<IRouteProvider>` and get back all of the routes which need to be registered for all modules, thanks to the IoC implementation scanning all of the loaded modules.
 
+It simply calls `GetRoutes` on each of them and then sends the resulting collection of `RouteDescriptor` instances off to the route publisher to be published (registered) for our shell.
+
+There's a bit more though. Routes in an ASP.NET MVC 3 application are global &mdash; there's only one actual site here, despite the multi-tenancy possibilities, so how are we making sure that only the routes for our shell are used to get to our tenant?
+
+This is where Orchard can go back and take advantage of some of the extensibility options built in to the ASP.NET MVC 3 framework. When you register a route in ASP.NET MVC 3, the method signature on the `RouteCollection` actually takes a `RouteBase`, which can be extended. So the route publisher actually orders the `RouteDescriptor` instances it has (by the Priority property which you can set when registering routes &mdash; as the order of routes is important in ASP.NET MVC 3) and then turns each route descriptor in to an instance of `ShellRoute`, which extends `RouteBase`.
+
+It's worth seeing what `ShellRoute` is and how it works as the principle could be applied elsewhere. It can be found in **Mvc/Routes/ShellRoute.cs** in the **ORchard.Framework** project.
+
+The crucial points in here are that it overrides `GetRouteData` and `GetVirtualPath` to ensure that the route only responds and matches if the request is for the right shell. It does this with the following code at the start of each of those methods:
+
+{% highlight csharp %}
+
+// locate appropriate shell settings for request
+var settings = _runningShellTable.Match(httpContext);
+
+// only proceed if there was a match, and it was for this client
+if (settings == null || settings.Name != _shellSettings.Name)
+    return null;
+
+{% endhighlight %}
+
+It's checking to see whether there's a match between the settings of the current request, which it can get from the running shells table which we saw previously, and the shell settings for this particular shell (`_shellSettings`, which it got as a constructor dependency). If there's no match, it returns null which tells ASP.NET MVC 3 that this route doesn't match this request. There's a bit more cleverness in here around making sure that paths can be found based on the location of the module itself, which you can have a glance at in here if you're interested!
+
+For now though, we'll content ourselves with knowing how the routes are registered on a per shell basis and then how they behave during a request to the application, based on which shell the request was for.
+
+## Model Binders and Shells
+
+If we go back to our `DefaultOrchardHost` the next line after publishing our routes was registering model binders. This is another ASP.NET MVC concept and the way we're doing this looks very similar to the way Orchard handled the routes.
+
+In fact it's pretty much exactly the same, meaning we don't need to dive in to this too far, except to note one thing &mdash; it isn't really implemented! Our `ModelBinderPublisher` actually looks like this:
+
+{% highlight csharp %}
+
+public class ModelBinderPublisher : IModelBinderPublisher {
+    private readonly ModelBinderDictionary _binders;
+
+    public ModelBinderPublisher(ModelBinderDictionary binders) {
+        _binders = binders;
+    }
+
+    public void Publish(IEnumerable<ModelBinderDescriptor> binders) {
+        // MultiTenancy: should hook default model binder instead and rely on shell-specific binders (instead adding to type dictionary)
+        foreach (var descriptor in binders) {
+            _binders[descriptor.Type] = descriptor.ModelBinder;
+        }
+    }
+}
+
+{% endhighlight %}
+
+As you can see, it doesn't really deal with multi-tenancy for model binders yet &mdash; Orchard is only at version 1.2xxx after all! In practice it probably isn't a problem, but you'll know where to look if it is, or when it gets implemented.
+
+## Orchard Events
+
+The last part of `Activate` method in the shell was this:
+
+{% highlight csharp %}
+
+using (var events = _eventsFactory()) {
+    events.Value.Activated();
+}
+
+{% endhighlight %}
+
+It's using `eventsFactory`, which is a function it acquired as a constructor dependency, to get an instance of `IOrchardShellEvents`, and calling the `Activated` method on it.
+
+This can be used to signal changes in application status to allow things like background tasks (which will be covered in another article) to take actions at key points in the application lifecycle.
+
+## Activation Complete!
+
+That's essentially it for the shell activation. As always I'd encourage you to go and dive deeper in to the source around the parts I've called out here &mdash; there's a lot of interesting code although I've tried to highlight the most relevant parts. 
+
+We've seen how the shell registeres routes and binders when it starts up in such a way as to have them only apply to that shell when they should. We also saw how the dependency system influences the design of the framework here &mdash; recall how the IoC implementation made it easy for Orchard to get all of the route pproviders that had been implemented across all relevant modules.
+
+Hopefully you'll come back for the next article, which is going to start to look at the request lifecycle &mdash; now that we've got our application up and running. It'll be linked from the [overview][Orchard Internals] once it's ready.
 
 [Orchard Host]: /orchard/2011/09/01/orchard-host.html
 [Orchard Startup]: /orchard/2011/08/30/orchard-startup-process.html
