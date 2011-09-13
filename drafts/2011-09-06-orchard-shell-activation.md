@@ -81,7 +81,7 @@ There's a bit more though. Routes in an ASP.NET MVC 3 application are global &md
 
 This is where Orchard can go back and take advantage of some of the extensibility options built in to the ASP.NET MVC 3 framework. When you register a route in ASP.NET MVC 3, the method signature on the `RouteCollection` actually takes a `RouteBase`, which can be extended. So the route publisher actually orders the `RouteDescriptor` instances it has (by the Priority property which you can set when registering routes &mdash; as the order of routes is important in ASP.NET MVC 3) and then turns each route descriptor in to an instance of `ShellRoute`, which extends `RouteBase`.
 
-It's worth seeing what `ShellRoute` is and how it works as the principle could be applied elsewhere. It can be found in **Mvc/Routes/ShellRoute.cs** in the **ORchard.Framework** project.
+It's worth seeing what `ShellRoute` is and how it works as the principle could be applied elsewhere. It can be found in **Mvc/Routes/ShellRoute.cs** in the **Orchard.Framework** project.
 
 The crucial points in here are that it overrides `GetRouteData` and `GetVirtualPath` to ensure that the route only responds and matches if the request is for the right shell. It does this with the following code at the start of each of those methods:
 
@@ -129,7 +129,7 @@ As you can see, it doesn't really deal with multi-tenancy for model binders yet 
 
 ## Orchard Events
 
-The last part of `Activate` method in the shell was this:
+The last part of the `Activate` method in the shell was this:
 
 {% highlight csharp %}
 
@@ -139,7 +139,7 @@ using (var events = _eventsFactory()) {
 
 {% endhighlight %}
 
-It's using `eventsFactory`, which is a function it acquired as a constructor dependency, to get an instance of `IOrchardShellEvents`, and calling the `Activated` method on it.
+It's using `_eventsFactory`, which is a function it acquired as a constructor dependency, to get an instance of `IOrchardShellEvents`, and calling the `Activated` method on it.
 
 This can be used to signal changes in application status to allow things like background tasks (which will be covered in another article) to take actions at key points in the application lifecycle.
 
@@ -147,7 +147,7 @@ This can be used to signal changes in application status to allow things like ba
 
 That's essentially it for the shell activation. As always I'd encourage you to go and dive deeper in to the source around the parts I've called out here &mdash; there's a lot of interesting code although I've tried to highlight the most relevant parts. 
 
-We've seen how the shell registeres routes and binders when it starts up in such a way as to have them only apply to that shell when they should. We also saw how the dependency system influences the design of the framework here &mdash; recall how the IoC implementation made it easy for Orchard to get all of the route pproviders that had been implemented across all relevant modules.
+We've seen how the shell registers routes and binders when it starts up in such a way as to have them only apply to the correct shell. We also saw how the dependency system influences the design of the framework here &mdash; recall how the IoC implementation made it easy for Orchard to get all of the route providers that had been implemented across all relevant modules.
 
 Hopefully you'll come back for the next article, which is going to start to look at the request lifecycle &mdash; now that we've got our application up and running. It'll be linked from the [overview][Orchard Internals] once it's ready.
 
