@@ -247,7 +247,7 @@ This is where Orchard is looking for the interfaces you would implement when cre
 
 <aside>
 <p>
-<strong>Note</strong>: It's required that your own interfaces implement (extend) one of the `IDependency` interfaces. A class which implements a custom interface and also one of the `IDependency` interfaces will not be registered correctly &mdash; the custom interface must extend one of the `IDependency` interfaces. This so Orchard knows to register <strong>your custom interface</strong> and not the base `IDependency` interface.
+<strong>Note</strong>: It's required that your own interfaces implement (extend) one of the <code>IDependency</code> interfaces. A class which implements a custom interface and also one of the <code>IDependency</code> interfaces will not be registered correctly &mdash; the custom interface must extend one of the <code>IDependency</code> interfaces. This so Orchard knows to register <strong>your custom interface</strong> and not the base <code>IDependency</code> interface.
 </p>
 </aside>
 
