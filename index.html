@@ -6,15 +6,15 @@ title: xyncro
 {% for post in paginator.posts %}
 <article itemscope itemtype="http://schema.org/BlogPosting">
   <header>
-	<h1 itemprop="name" itemprop="headline">{{post.title}}</h1>
+	<h1 itemprop="name headline">{{post.title}}</h1> <a itemprop="url" href="{{post.url}}">#</a>
   </header>
   <section itemprop="articleBody">
 	{{post.content}}
   </section>
   <footer>
-	Posted by <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+	Posted by <span itemprop="author copyrightHolder" itemscope itemtype="http://schema.org/Person">
 	  <span itemprop="name">Andrew Cherry</span>
-	</span> on <time itemprop="dateCreated" value="{{post.date | data_to_xmlschema}}">{{post.date | date_to_string}}</time>.
+	</span> on <time itemprop="dateCreated datePublished" value="{{post.date | data_to_xmlschema}}">{{post.date | date_to_string}}</time>.
   </footer>
 </article>
 {% endfor %}
