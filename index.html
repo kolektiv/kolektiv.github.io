@@ -4,7 +4,17 @@ title: xyncro
 ---
 
 {% for post in paginator.posts %}
-<article>
-  <h1>{{post.title}}</h1>
+<article itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+	<h1 itemprop="name" itemprop="headline">{{post.title}}</h1>
+  </header>
+  <section itemprop="articleBody">
+	{{post.content}}
+  </section>
+  <footer>
+	Posted by <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+	  <span itemprop="name">Andrew Cherry</span>
+	</span> on <time itemprop="dateCreated" value="{{post.date | data_to_xmlschema}}">{{post.date | date_to_string}}</time>.
+  </footer>
 </article>
 {% endfor %}
