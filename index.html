@@ -1,20 +1,9 @@
----
-layout: default
-title: xyncro
----
-
-{% for post in paginator.posts %}
-<article itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-	<h1 itemprop="name headline">{{post.title}}</h1> <a itemprop="url" href="{{post.url}}">#</a>
-  </header>
-  <section itemprop="articleBody">
-	{{post.content}}
-  </section>
-  <footer>
-	Posted by <span itemprop="author copyrightHolder" itemscope itemtype="http://schema.org/Person">
-	  <span itemprop="name">Andrew Cherry</span>
-	</span> on <time itemprop="dateCreated datePublished" datetime="{{post.date | date_to_xmlschema}}">{{post.date | date_to_string}}</time>.
-  </footer>
-</article>
-{% endfor %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>kolektiv (Andrew Cherry)</title>
+  </head>
+  <body>
+    <h1>kolektiv</h1>
+  </body>
+</html>
