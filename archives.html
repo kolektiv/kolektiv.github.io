@@ -1,15 +1,18 @@
 ---
 layout: default
 ---
-
 <section>
-  <h1>Archives</h1>
-  <ul>
-    {% for post in site.posts %}
-    <li>
-      <span class="post-date">{{ post.date | date: "%Y.%m.%-d" }}</span>
-      <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
+  <header>
+    <h1>Archives</h1>
+  </header>
+  <nav>
+    <dl class="hfeed">
+      {% for post in site.posts %}
+      <span class="hentry entry">
+        <dt class="updated published">{{ post.date | date: "%Y.%m.%-d" }}</dt>
+        <dd class="entry-title"><a rel="bookmark" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></dd>
+      </span>
+      {% endfor %}
+    </dl>
+  </nav>
 </section>

@@ -1,9 +1,14 @@
 ---
 layout: default
 ---
-<section>
-  <h1>{{ page.title}}</h1>
-  <article>
+<article class="hentry">
+  <header>
+    <h1 class="entry-title">{{ page.title}}</h1>
+  </header>
+  <div class="entry-content">
     {{ content }}
-  </article>
-</section>
+  </div>
+</article>
+<nav>
+  <a href="{{ site.baseurl }}/">Latest...</a>
+</nav>
