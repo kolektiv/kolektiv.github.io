@@ -37,7 +37,7 @@ body {
 
 nav {
   background-color: darken($background, 5%);
-  border-bottom: 1px solid darken($background, 25%);
+  //border-bottom: 1px solid darken($background, 25%);
   
   ul {
     @include zero;
@@ -69,7 +69,7 @@ h1, h2, h3 {
 }
 
 header {
-  margin: 40px;
+  margin: 80px 40px;
 
   h1, h2 {
     display: inline;
