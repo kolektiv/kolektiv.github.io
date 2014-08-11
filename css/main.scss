@@ -144,18 +144,16 @@ footer {
   padding: 0 40px;
 }
 
-// Gists
-
-.gist{font-size:12px;line-height:18px;width:900px; margin: 20px -40px 20px -40px;}
-.gist pre{font-family:Menlo,Monaco,'Bitstream Vera Sans Mono','Courier New',monospace !important}
-.gist-data{background-color:#fff !important}
-.gist-meta{font-family:Helvetica,Arial,sans-serif;font-size:12px !important}
-.gist-meta a{color:$primary !important;text-decoration:none;border-bottom:none}
-.gist-meta a:hover{color:#0e4071 !important}
-
 // Solarized
 
-.highlight { background-color: #fdf6e3; color: #586e75 }
+.highlight {
+  border: 1px solid darken($background, 5%);
+  font-size: 14px;
+  padding: 20px 40px;
+  margin: 0 -40px;
+}
+
+.highlight { background-color: lighten($background, 5%); color: #586e75 }
 .highlight .c { color: #93a1a1 } /* Comment */
 .highlight .err { color: #586e75 } /* Error */
 .highlight .g { color: #586e75 } /* Generic */

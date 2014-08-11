@@ -6,7 +6,7 @@ categories: lenses aether fsharp
 
 I've just released a library ([SemVer.Net][semver-nuget]) for doing [SemVer 2.0.0][semver] compliant semantic versioning in .NET. At the moment it provides a simple SemanticVersion type and nothing else, but that type fully implements the standard and sorts all semantic versions correctly.
 
-```fsharp
+{% highlight fsharp %}
 open System
 open System.Collections.Generic
 open System.Threading.Tasks
@@ -91,7 +91,7 @@ type OwinMonadBuilder () =
                     body enum.Current))))
  
 let owin = OwinMonadBuilder ()
-```
+{% endhighlight %}
 
 And some more content after...
 
