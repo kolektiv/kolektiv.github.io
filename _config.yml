@@ -1,0 +1,13 @@
+# Site settings
+title: kolektiv (Andrew Cherry)
+email: andrew@xyncro.com
+description: "Blog"
+baseurl: ""
+url: "https://kolektiv.github.io"
+twitter_username: kolektiv
+github_username: kolektiv
+
+# Build settings
+encoding: utf-8
+markdown: kramdown
+permalink: pretty

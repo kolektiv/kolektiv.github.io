@@ -1,0 +1,119 @@
+---
+---
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,200,300,500);
+
+$primary: #222;
+$secondary: #aaa;
+$background: #fafafa;
+
+@mixin zero {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  border-bottom: 1px dashed $primary;
+  color: $primary;
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    border-bottom: 1px solid $primary;
+  }
+}
+
+body {
+  @include zero;
+
+  background-color: $background;
+  color: $primary;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 300;
+  margin: 0 auto;
+  width: 900px;
+}
+
+nav {
+  background-color: darken($background, 5%);
+  border-bottom: 1px solid darken($background, 25%);
+  
+  ul {
+    @include zero;
+
+    list-style: none;
+
+    li {
+      display: inline-block;
+      margin: 20px 0 20px 40px;
+
+      a {
+        border-bottom: none;
+        font-weight: 300;
+        text-decoration: none;
+        text-transform: lowercase;
+
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+h1, h2, h3 {
+  @include zero;
+
+  text-transform: lowercase;
+}
+
+header {
+  margin: 40px;
+
+  h1, h2 {
+    display: inline;
+    font-size: 36px;
+  }
+
+  h1 {
+    font-weight: 500;
+  }
+
+  h2 {
+    font-weight: 300;
+  
+    &:before {
+      content: "/";
+    }
+  }
+}
+
+section {
+  margin: 0 40px 40px 40px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  p {
+    line-height: 28px;
+  }
+
+  ul {
+    @include zero;
+
+    list-style: none;
+
+    li {
+      margin: 20px 0;
+
+      .post-date {
+        display: inline-block;
+        width: 150px;
+      }
+    }
+  }
+}
