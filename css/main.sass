@@ -1,0 +1,107 @@
+---
+---
+
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,200,300,500)
+@import common
+
+a 
+  border-bottom: 1px dashed $fore
+  color: $fore
+  font-weight: 500
+  text-decoration: none
+
+  &:hover 
+    border-bottom: 1px solid $fore
+
+body 
+  background-color: $back
+  color: $fore
+  font-family: 'Roboto'
+  font-size: 16px
+  font-weight: 300
+  margin: 0 auto
+  padding: 0
+  width: 900px
+
+h1, h2
+  +zero
+  text-transform: lowercase
+
+nav
+  +zero
+  padding: 20px 40px
+  
+  &:first-child
+    background-color: darken($back, 5%)
+    
+    a
+      border-bottom: none
+      font-weight: 300
+      text-decoration: none
+      text-transform: lowercase
+      
+      &:hover
+        border-bottom: 1px solid $fore
+
+dl
+  +zero
+
+  dt, dd
+    +zero
+    padding-bottom: 20px
+
+  dt
+    clear: left
+    float: left
+    width: 150px
+
+ul
+  +zero
+  list-style: none
+
+  li
+    display: inline-block
+    margin: 0
+    padding: 0 20px 0 0
+
+header
+  +zero
+
+body > header
+  padding: 80px 40px 70px 40px
+  
+  h1, h2
+    display: inline-block
+    font-size: 36px
+      
+  h1
+    font-weight: 500
+
+  h2
+    font-weight: 300
+
+    &:before
+      content: "/"
+
+section, article
+  padding: 0 40px
+
+  header 
+    h1
+      font-weight: 300
+      margin-bottom: 20px
+
+  p 
+    line-height: 28px
+    margin-bottom: 20px
+
+section nav
+  +zero
+
+section + nav, article + nav
+  padding: 0 40px
+
+footer
+  border-top: 1px solid darken($back, 20%)
+  margin: 80px 0
+  padding: 0 40px

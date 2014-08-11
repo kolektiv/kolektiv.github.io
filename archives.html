@@ -9,7 +9,7 @@ layout: default
     <dl class="hfeed">
       {% for post in site.posts %}
       <span class="hentry entry">
-        <dt class="updated published">{{ post.date | date: "%Y.%m.%-d" }}</dt>
+        <dt class="updated published">{{ post.date | date: "%Y.%m.%d" }}</dt>
         <dd class="entry-title"><a rel="bookmark" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></dd>
       </span>
       {% endfor %}
