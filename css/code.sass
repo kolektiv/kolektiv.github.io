@@ -4,24 +4,34 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro)
 @import common
 
+=code
+  font-family: 'Source Code Pro'
+  font-size: 14px
+  font-weight: 400
+
+p
+  code
+    +code
+    background-color: darken($back, 5%)
+    margin: -2px 0
+    padding: 2px 4px
+    
 .highlighttable
   margin: 20px -40px 20px -80px
   width: 940px
 
   pre
-    font-family: 'Source Code Pro'
-    font-size: 14px
-    font-weight: 400
+    +code
     line-height: 21px
 
   .linenos
     color: lighten($fore, 70%)
-    padding: 20px 0
+    padding: 10px 0
     width: 40px
 
   .code
     background-color: lighten($back, 5%)
-    padding: 20px 40px
+    padding: 10px 40px
 
 .highlight
   color: #586e75
