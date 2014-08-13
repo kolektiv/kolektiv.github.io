@@ -90,6 +90,6 @@ We can see that we're using a couple of new functions here as well &mdash; `getP
 So, that's a very brief intro to Aether, the next thing to do is to have a glance at the code if you're interested in using it. It's small and not very complicated and the useful functions are all quite apparent (hopefully). Head over to [here][aether] and take a look, and feel free to get in touch/raise issues/send pull requests if you feel like it!
 
 [aether]: https://github.com/xyncro/aether
-[aether-intro]: http://kolektiv.github.io/fsharp/aether/2014/08/10/Aether/
+[aether-intro]: http://kolektiv.github.io/fsharp/aether/2014/08/10/aether/
 [bugsquash]: http://bugsquash.blogspot.co.uk/2011/11/lenses-in-f.html
 [fsharpx-lens]: https://github.com/fsprojects/fsharpx/blob/master/src/FSharpx.Core/Lens.fs
