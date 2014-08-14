@@ -15,7 +15,7 @@ A technical debt discussion between two surprisingly stilted characters with sus
 
 > -- <cite>Implementer</cite>
 >
-> If we build a cut-down version, we'll hit the deadline, but then it's going to take us more time in the future whenever we would have needed the full feature. We'll have to go back and build that at some point, and it'll be more work in the long run - we'll have to throw away at least part of the cut-down version.
+> If we build a cut-down version, we'll hit the deadline, but then it's going to take us more time in the future whenever we would have needed the full feature. We'll have to go back and build that at some point, and it'll be more work in the long run -- we'll have to throw away at least part of the cut-down version.
 
 > -- <cite>Decision Maker</cite>
 >
