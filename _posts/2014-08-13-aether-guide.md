@@ -52,10 +52,10 @@ In this case, we need a partial lens. The lenses so far have been total, with th
 {% highlight fsharp linenos=table %}
 // composition operators
 
-(>-->) // Total   -> Total
-(>?->) // Partial -> Total
-(>-?>) // Total   -> Partial
-(>??>) // Partial -> Partial
+(>-->) // Total -> Total -> Total
+(>?->) // Partial -> Total -> Partial
+(>-?>) // Total -> Partial -> Partial
+(>??>) // Partial -> Partial -> Partial
 {% endhighlight %}
 
 All except the `(>-->)` operator return a new partial lens. Let's change the earlier example slightly and see what this looks like:
