@@ -23,10 +23,27 @@ body
   padding: 0
   width: 900px
 
+strong
+  font-weight: 500  
+
 h1, h2
   +zero
   text-transform: lowercase
 
+ul
+  +zero
+  list-style: none
+    
+  li
+    +zero
+
+ol
+  margin-bottom: 40px
+  
+  li
+    +zero
+    margin-bottom: 10px
+        
 nav
   +zero
   padding: 20px 40px
@@ -43,6 +60,13 @@ nav
       &:hover
         border-bottom: 1px solid $fore
 
+  ul
+    +zero
+      
+    li
+      display: inline-block
+      padding: 0 20px 0 0
+        
 dl
   +zero
 
@@ -54,15 +78,6 @@ dl
     clear: left
     float: left
     width: 150px
-
-ul
-  +zero
-  list-style: none
-
-  li
-    display: inline-block
-    margin: 0
-    padding: 0 20px 0 0
 
 header
   +zero

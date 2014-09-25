@@ -9,6 +9,9 @@
   font-size: 14px
   font-weight: 400
 
+=comment
+  color: #ccc
+
 p
   code
     +code
@@ -37,7 +40,7 @@ p
   color: #586e75
 
   .c
-    color: #93a1a1  /* Comment */
+    +comment  /* Comment */
     
   .err
     color: #586e75  /* Error */
@@ -64,13 +67,13 @@ p
     color: #586e75  /* Punctuation */
 
   .cm  
-    color: #93a1a1  /* Comment.Multiline */
+    +comment  /* Comment.Multiline */
 
   .cp 
     color: #859900  /* Comment.Preproc */
 
   .c1 
-    color: #93a1a1  /* Comment.Single */
+    +comment  /* Comment.Single */
 
   .cs 
     color: #859900  /* Comment.Special */
