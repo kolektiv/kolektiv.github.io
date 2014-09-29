@@ -11,7 +11,7 @@ Previously, Isomorphisms were simply treated as another kind of lens, and compos
 The new model works better by making isomorphisms a first class concept -- indeed they have their own type signature (and it's very obvious):
 
 {% highlight fsharp linenos=table %}
-type Iso<'a,'b> = ('a -> 'b), ('b -> 'a)
+type Iso<'a,'b> = ('a -> 'b) * ('b -> 'a)
 {% endhighlight %}
 
 Very simply -- the pair of functions which map `a` to `b` and back. Partial isomorphisms are represented the same way, with the first function returning `'b option` rather than `'b`. Isomorphisms now also have their own composition operators for composing an isomorphism with a lens which solves the partial chain issue and they follow the exact same pattern as operators for composing lenses with lenses:
