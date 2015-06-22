@@ -4,6 +4,8 @@ title: Aether &mdash; Brief Guide
 categories: fsharp aether
 ---
 
+__NOTE:__ This article was updated in June 2015 to indicate the use of the final syntax in Aether. Additionally, it is worth noting the changes around isomorphisms mentioned in the later [update][update].
+
 A couple of days ago I released [Aether][aether] &mdash; introduced [here][aether-intro] &mdash; a little library for using Lenses in F#. [FSharpx][fsharpx-lens] already includes a lens implementation (and it's well written about by Mauricio Scheffer [here][bugsquash]), so "why bother?" is a reasonable question. Firstly, for libraries which wish to provide lenses over their own types, Aether does not require you to take a dependency on Aether &mdash; you can implement the types required natively. Secondly, Aether makes a distinction explicit between total and partial lenses.
 
 ## First &mdash; Lenses
@@ -31,14 +33,14 @@ let valueLens = (fun x -> x.Value), (fun v x -> { x with Value = v })
 
 It's a `Lens<Inner,string>` &mdash; a lens from `Inner` to `string`. In isolation this might not look very useful but as they're just functions, we can compose lenses together. If we have a lens from `Outer` to `Inner` and a lens from `Inner` to `string` we can compose them &mdash; and end up with a lens of `Outer` to `string`.
 
-Now we can simply use a lens function (`setL` in this case) to set `Value` like so (assuming we have a lens `Outer` to `Inner` named `innerLens`):
+Now we can simply use a lens function (`Lens.set` in this case) to set `Value` like so (assuming we have a lens `Outer` to `Inner` named `innerLens`):
 
 {% highlight fsharp linenos=table %}
 // (>-->) is an operator which composes two lenses
 let composedLens = innerLens >--> valueLens
 
-// or with partial application, let setValue = setL composedLens
-let setValue v outer = setL composedLens v outer
+// or with partial application, let setValue = Lens.set composedLens
+let setValue v outer = Lens.set composedLens v outer
 {% endhighlight %}
 
 If we provide lenses for commonly used aspects of our types, they can be composed in all kinds of new ways and we can save ourselves a lot of awkward/tedious/error-prone "longhand" manipulation of immutable values.
@@ -79,13 +81,13 @@ Our first lens now returns an `option` type for the getter &mdash; but note that
 let composedLens = innerLens >?-> valueLens
 
 // returns a string option
-let getValue outer = getPL composedLens outer
+let getValue outer = Lens.getPartial composedLens outer
 
 // still takes a string, but it'll only be set if Inner is not None
-let setValue v outer = setPL composedLens v outer
+let setValue v outer = Lens.setPartial composedLens v outer
 {% endhighlight %}
 
-We can see that we're using a couple of new functions here as well &mdash; `getPL` and `setPL`. They're simply the equivalents of `setL` and `getL` for partial lenses, and in general this is a convention that the Aether library sticks to.
+We can see that we're using a couple of new functions here as well &mdash; `Lens.getPartial` and `Lens.setPartial`. They're simply the equivalents of `Lens.set` and `Lens.get` for partial lenses, and in general this is a convention that the Aether library sticks to. You will be unsurprised to learn that these functions are joined by `Lens.map` and `Lens.mapPartial` too, behaving much as you would expect.
 
 So, that's a very brief intro to Aether, the next thing to do is to have a glance at the code if you're interested in using it. It's small and not very complicated and the useful functions are all quite apparent (hopefully). Head over to [here][aether] and take a look, and feel free to get in touch/raise issues/send pull requests if you feel like it!
 
@@ -93,3 +95,4 @@ So, that's a very brief intro to Aether, the next thing to do is to have a glanc
 [aether-intro]: http://kolektiv.github.io/fsharp/aether/2014/08/10/aether/
 [bugsquash]: http://bugsquash.blogspot.co.uk/2011/11/lenses-in-f.html
 [fsharpx-lens]: https://github.com/fsprojects/fsharpx/blob/master/src/FSharpx.Core/Lens.fs
+[update]: http://kolektiv.github.io/fsharp/aether/2014/09/29/aether-update/
